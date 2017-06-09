@@ -14,4 +14,5 @@
 		<device-type>ajax</device-type>
 		<timeout-uri>/timeout.zul</timeout-uri>
 	</device-config>
+	
 </zk>

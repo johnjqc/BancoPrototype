@@ -1,16 +1,20 @@
 <?page title="Prototipo" contentType="text/html;charset=UTF-8"?>
-<zk>
- <window title="Notify person" border="normal" apply="com.payulatam.prototipo.MainPage" width="400px">
-  <vbox>
-   <label value="Select person to notify"/>
-   <radiogroup id="rg">
-    <vbox>
-     <radio id="rDeveloper" radiogroup="rg" label="Developer" checked="true"/>
-     <radio id="rManager" radiogroup="rg" label="Manager"/>
-     <radio id="rAdministrator" radiogroup="rg" label="Administrator"/>
-    </vbox>
-   </radiogroup>
-   <button label="Notify" id="btnNotify"/>
-  </vbox>
- </window>
+
+<zk xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul/zul.xsd">
+	<window title="Notify person" border="normal"
+		apply="com.payulatam.prototipo.MainPage" width="400px">
+		<include src="/timeout.zul" />
+		<vbox>
+			<label id="selectPerson" value="${labels.app.selectPerson}" />
+			<radiogroup id="rg">
+				<vbox>
+					<radio id="rDeveloper" radiogroup="rg" label="Developer"
+						checked="true" />
+					<radio id="rManager" radiogroup="rg" label="Manager" />
+					<radio id="rAdministrator" radiogroup="rg" label="Administrator" />
+				</vbox>
+			</radiogroup>
+			<button label="Notify" id="btnNotify" />
+		</vbox>
+	</window>
 </zk>
