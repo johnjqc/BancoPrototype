@@ -3,7 +3,7 @@
 
 <zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native">
 	<vlayout xmlns:n="native" >
-		<h:image src="images/payu_logo.png" width="300px" />
+		<h:image src="images/payu_logo.png" width="300px" style="margin-left: auto; margin-right: auto; display: block;" />
 		<h:br />
 		<label id="lblAplication" value="${labels.home.description}" />
 		<label id="lbName" value="${labels.home.name}: John Jairo Quiroga Carvajal" />

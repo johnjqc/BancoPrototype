@@ -2,13 +2,12 @@
 <!DOCTYPE zul>
 
 <zk>
-	<toolbar >
-		<toolbarbutton label="${labels.tool.home}" tooltiptext="Home" onClick="alert(self.label)" />
+	<toolbar apply="com.payulatam.prototipo.ToolBarNavigation" >
+		<toolbarbutton id="btnHome" label="${labels.tool.home}" tooltiptext="Home" />
 		<space />
-		<toolbarbutton label="${labels.tool.customers}" onClick="alert(self.label)"  />
-		<toolbarbutton label="${labels.tool.customers}" onClick="alert(self.label)" />
-		<toolbarbutton label="${labels.tool.accounts}" onClick="alert(self.label)" />
-		<toolbarbutton label="${labels.tool.movements}" onClick="alert(self.label)" />
-		<toolbarbutton label="${labels.tool.reports}" onClick="alert(self.label)" />
+		<toolbarbutton id="btnCustomers" label="${labels.tool.customers}" />
+		<toolbarbutton id="btnAccount" label="${labels.tool.accounts}" />
+		<toolbarbutton id="btnMovements"  label="${labels.tool.movements}" />
+		<toolbarbutton id="btnReports"  label="${labels.tool.reports}"  />
 	</toolbar>
 </zk>

@@ -12,7 +12,7 @@
 
 	<device-config>
 		<device-type>ajax</device-type>
-		<timeout-uri>/timeout.zul</timeout-uri>
+		<timeout-uri>/common/timeout.zul</timeout-uri>
 	</device-config>
 	
 </zk>

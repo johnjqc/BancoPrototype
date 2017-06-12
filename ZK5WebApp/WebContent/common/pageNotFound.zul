@@ -1,0 +1,29 @@
+<?page title="${labels.app.pageNotFound}" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/Favicon.ico"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layout/template.zul" ?>
+
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+
+
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native" xmlns:h="xhtml">
+    <zscript>
+        <![CDATA[
+            contextPath = Executions.getCurrent().getContextPath();
+        ]]>
+    </zscript>
+    <window self="@{define(content)}" >
+    	<h:image src="images/404.png" width="300px" style="margin-left: auto; margin-right: auto; display: block;" />
+        <vbox apply="com.payulatam.prototipo.tools.ErrorController" sclass="errorbox" width="96%">
+        
+            <label value="The page that you are requesting does not exist." />
+            <hbox>
+                <label value="If you entered the URL directly in the navigation bar of the browser, please review it or click in the following link in order to go to initial page: " />
+                <n:a href="${contextPath}/">
+                    <label value="Go to init" />
+                </n:a>
+            </hbox>
+            <label value="If you reached this page from another page of LibrePlan please notify us in order to fix it as soon as possible." />
+            <label value="Sorry for the inconvenience." />
+        </vbox>
+    </window>
+</zk>

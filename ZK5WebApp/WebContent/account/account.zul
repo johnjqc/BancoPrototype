@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE zul>
-
 <?page title="Prototipo PayUBank" contentType="text/html;charset=UTF-8"?>
 <?link rel="shortcut icon" type="image/x-icon" href="/images/Favicon.ico"?>
+
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layout/template.zul" ?>
 
-<zk xmlns:h="xhtml">
-	<include self="@{define(content)}" src="home.zul" />
+<zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native">
+	<include self="@{define(toolbar)}" src="/WEB-INF/layout/toolbar.zul"/>
+	<vlayout self="@{define(content)}" xmlns:n="native" >
+		Account
+	</vlayout>
 </zk>

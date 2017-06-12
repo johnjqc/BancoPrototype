@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zul>
+
+<?page title="Prototipo PayUBank" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/Favicon.ico"?>
+
+<window title="Session Timeout" border="normal" position="center" mode="overlapped">
+	<window>
+		<vbox apply="com.payulatam.prototipo.tools.ErrorController" sclass="warningbox">
+			${labels.app.timeOut}
+			<hbox style="margin-left:auto; margin-right:auto">
+				<button id="quitSession" label="${labels.app.backToHome}" />
+			</hbox>
+		</vbox>
+	</window>
+</window>
