@@ -1,8 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zul>
+
 <zk>
-	<toolbar>
+	<toolbar >
 		<toolbarbutton label="${labels.tool.home}" tooltiptext="Home" onClick="alert(self.label)" />
 		<space />
-		<toolbarbutton label="${labels.tool.customers}" tooltiptext="Home"  />
+		<toolbarbutton label="${labels.tool.customers}" onClick="alert(self.label)"  />
 		<toolbarbutton label="${labels.tool.customers}" onClick="alert(self.label)" />
 		<toolbarbutton label="${labels.tool.accounts}" onClick="alert(self.label)" />
 		<toolbarbutton label="${labels.tool.movements}" onClick="alert(self.label)" />

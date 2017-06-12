@@ -1,15 +1,11 @@
-<zk>
-	<style>
-		.payu .z-label {
-			font-size: 30px;
-		}
-	</style>
-	<vlayout xmlns:n="native">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zul>
 
-		<div class="payu">PayuLatam</div>
-
+<zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native">
+	<vlayout xmlns:n="native" >
+		<h:image src="images/payu_logo.png" width="300px" />
+		<h:br />
 		<label id="lblAplication" value="${labels.home.description}" />
 		<label id="lbName" value="${labels.home.name}: John Jairo Quiroga Carvajal" />
 	</vlayout>
-
 </zk>

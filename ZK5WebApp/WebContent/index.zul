@@ -1,12 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zul>
+
 <?page title="Prototipo PayUBank" contentType="text/html;charset=UTF-8"?>
 <?link rel="shortcut icon" type="image/x-icon" href="/images/Favicon.ico"?>
 <?link rel="icon" type="image/x-icon" href="/images/Favicon.ico"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layout/template.zul" ?>
 
-<zk xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul/zul.xsd">
-	<window border="nome" apply="com.payulatam.prototipo.MainPage" width="100%">
-		<vlayout xmlns:n="native" >
-			<include src="/toolbar.zul" />
-			<include src="/home.zul" />
-		</vlayout>
-	</window>
+<zk xmlns:h="xhtml">
+	<include self="@{define(toolbar)}" src="/WEB-INF/layout/toolbar.zul"/>
+	<include self="@{define(content)}" src="home.zul" />
 </zk>

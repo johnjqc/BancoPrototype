@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zul>
+
+<zk xmlns:h="xhtml">
+	<window border="normal" apply="com.payulatam.prototipo.MainPage" width="100%">
+		<vlayout xmlns:n="native">
+			<div self="@{insert(toolbar)}" />
+			<div self="@{insert(content)}" />
+		</vlayout>
+	</window>
+</zk>
