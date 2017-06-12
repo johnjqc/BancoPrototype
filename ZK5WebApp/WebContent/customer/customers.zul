@@ -6,7 +6,41 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layout/template.zul" ?>
 
 <zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native">
-	<vlayout self="@{define(content)}" xmlns:n="native" >
-		Customers
+	<vlayout self="@{define(content)}" xmlns:n="native">
+		<grid>
+			<columns>
+				<column  width="150px" />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<label value="${labels.customer.customer}" />
+					<textbox value="" width="250px" tabindex="1" />
+				</row>
+				<row>
+					<label value="${labels.customer.address}" />
+					<textbox value="" width="250px" tabindex="1" />
+				</row>
+				<row>
+					<label value="${labels.customer.phone}" />
+					<textbox value="" width="250px" tabindex="1" />
+				</row>
+				<row>
+                    <cell colspan="2" style="text-align:center">
+                        <vlayout>
+                            <button label="${labels.app.search}" width="100px" height="30px" />
+                        </vlayout>
+                    </cell>
+                </row>
+			</rows>
+		</grid>
+		<toolbar apply="">
+			<toolbarbutton id="btnNew" label="${labels.customer.new}" />
+			<space />
+			<toolbarbutton id="btnEdit" label="${labels.customer.edit}" />
+			<toolbarbutton id="btnDelete" label="${labels.customer.delete}" />
+		</toolbar>
+		<grid>
+		</grid>
 	</vlayout>
 </zk>
