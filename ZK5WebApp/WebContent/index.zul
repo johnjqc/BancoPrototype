@@ -6,5 +6,5 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layout/template.zul" ?>
 
 <zk xmlns:h="xhtml">
-	<include self="@{define(content)}" src="home.zul" />
+	<include self="@{define(content)}" src="pages/home.zul" />
 </zk>

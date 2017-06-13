@@ -26,7 +26,7 @@ public class ToolBarNavigation extends GenericForwardComposer {
 	 * @param evt
 	 */
 	public void onClick$btnCustomers(Event evt) {
-		Executions.getCurrent().sendRedirect("/customer/customers.zul");
+		Executions.getCurrent().sendRedirect("/pages/customer/customers.zul");
 	}
 	
 	/**
@@ -34,7 +34,7 @@ public class ToolBarNavigation extends GenericForwardComposer {
 	 * @param evt
 	 */
 	public void onClick$btnAccount(Event evt) {
-		Executions.getCurrent().sendRedirect("/account/account.zul");
+		Executions.getCurrent().sendRedirect("/pages/account/account.zul");
 	}
 	
 	/**
@@ -42,7 +42,7 @@ public class ToolBarNavigation extends GenericForwardComposer {
 	 * @param evt
 	 */
 	public void onClick$btnMovements(Event evt) {
-		Executions.getCurrent().sendRedirect("/movement/movement.zul");
+		Executions.getCurrent().sendRedirect("/pages/movement/movement.zul");
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class ToolBarNavigation extends GenericForwardComposer {
 	 * @param evt
 	 */
 	public void onClick$btnReports(Event evt) {
-		Executions.getCurrent().sendRedirect("/report/report.zul");
+		Executions.getCurrent().sendRedirect("/pages/report/report.zul");
 	}
 
 }

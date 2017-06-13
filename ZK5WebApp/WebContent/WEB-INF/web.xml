@@ -43,7 +43,7 @@
 	
 	<error-page>
         <error-code>404</error-code>
-        <location>/common/pageNotFound.zul</location>
+        <location>/pages/common/pageNotFound.zul</location>
     </error-page>
 	
 	<session-config>
