@@ -1,4 +1,4 @@
-package com.payultam.entitites;
+package com.payulatam.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;

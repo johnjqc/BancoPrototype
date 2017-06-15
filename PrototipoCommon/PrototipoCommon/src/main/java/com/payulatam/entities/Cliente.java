@@ -1,4 +1,4 @@
-package com.payultam.entitites;
+package com.payulatam.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -17,6 +17,7 @@ public class Cliente implements Serializable {
 	@Column(name="\"Direccion\"")
 	private String direccion;
 
+	@Id
 	private Integer id;
 
 	@Column(name="\"Nombre\"")
