@@ -4,8 +4,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -45,10 +45,10 @@ public class ErrorController extends GenericForwardComposer {
 
 		if (code != null) {
 			errorMessage += " [Status Code: " + code + "]";
-			if (code == HttpServletResponse.SC_FORBIDDEN) {
-				String uri = (String) Executions.getCurrent().getAttribute("javax.servlet.error.request_uri");
-				errorMessage += " [Request URI: " + uri + "]";
-			}
+//			if (code == HttpServletResponse.SC_FORBIDDEN) {
+//				String uri = (String) Executions.getCurrent().getAttribute("javax.servlet.error.request_uri");
+//				errorMessage += " [Request URI: " + uri + "]";
+//			}
 		}
 //		LOG.error(errorMessage, exception);
 	}
@@ -62,8 +62,8 @@ public class ErrorController extends GenericForwardComposer {
 	}
 
 	public void onClick$quitSession() {
-		HttpServletRequest nativeRequest = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
-		nativeRequest.getSession().invalidate();
+//		HttpServletRequest nativeRequest = (HttpServletRequest) Executions.getCurrent().getNativeRequest();
+//		nativeRequest.getSession().invalidate();
 		Executions.sendRedirect("/");
 	}
 
