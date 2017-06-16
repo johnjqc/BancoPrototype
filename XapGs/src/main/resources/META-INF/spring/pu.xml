@@ -28,8 +28,8 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.payulatam.entities.Cliente</value>
-				<value>com.payulatam.entities.Cuenta</value>
-				<value>com.payulatam.entities.Movimiento</value>
+<!-- 				<value>com.payulatam.entities.Cuenta</value> -->
+<!-- 				<value>com.payulatam.entities.Movimiento</value> -->
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -47,15 +47,22 @@
 	<!-- An external data source that will be responsible for persisting changes 
 		done on the cluster that connects to this mirror using Hibernate. -->
 	<bean id="hibernateSpaceDataSource"
-		class="org.openspaces.persistency.hibernate.DefaultHibernateSpaceSynchronizationEndpointFactoryBean">
+		class="org.openspaces.persistency.hibernate.DefaultHibernateExternalDataSource">
 		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="initialLoadEntries">
+            <list>
+<!--                 <value>com.payulatam.entities.Cliente</value> -->
+<!-- 				<value>com.payulatam.entities.Cuenta</value> -->
+<!-- 				<value>com.payulatam.entities.Movimiento</value> -->
+            </list>
+        </property>
 	</bean>
 	
 	<bean id="hibernateSpaceSynchronizationEndpoint" class="org.openspaces.persistency.hibernate.DefaultHibernateSpaceSynchronizationEndpointFactoryBean">
     	<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
-	<os-core:space id="space" url="/./space" schema="persistent" >
+	<os-core:space id="prototipo" url="/./prototipo" schema="persistent" external-data-source="hibernateSpaceDataSource">
 <!--         <os-core:properties> -->
 <!--             <props> -->
 <!--                 Use ALL IN CACHE -->
@@ -70,17 +77,18 @@
     <!--
         Defines a distributed transaction manager.
     -->
-<!--      <os-core:distributed-tx-manager id="transactionManager"/> -->
+     <os-core:distributed-tx-manager id="transactionManager"/>
 
     <!--
         OpenSpaces simplified space API built on top of IJSpace/JavaSpace.
     -->
-<!--     <os-core:giga-space id="gigaSpace" space="space" tx-manager="transactionManager"/> -->
+    <os-core:giga-space id="gigaSpace" space="prototipo" tx-manager="transactionManager"/>
 
     <!--
         The data processor bean
     -->
-<!--     <bean id="dataProcessor" class="com.payulatam.pu.Processor"/> -->
+    <bean id="dataProcessor" class="com.payulatam.pu.Processor"/>
+   
 
     <!--
         A polling event container that perfoms (by default) polling take operations against

@@ -6,7 +6,7 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layout/template.zul" ?>
 
 <zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native">
-	<vlayout self="@{define(content)}" xmlns:n="native">
+	<vlayout self="@{define(content)}" xmlns:n="native" apply="com.payulatam.prototipo.ClienteController">
 		<grid>
 			<columns>
 				<column  width="150px" />
@@ -40,7 +40,13 @@
 			<toolbarbutton id="btnEdit" label="${labels.customer.edit}" />
 			<toolbarbutton id="btnDelete" label="${labels.customer.delete}" />
 		</toolbar>
-		<grid>
+		<label id="lblNum" value="1" />
+		<grid id="customers" model="@{clientes}">
+			<columns>
+				<column >${labels.customer.customer}</column>
+				<column >${labels.customer.address}</column>
+				<column>${labels.customer.phone}</column>
+			</columns>
 		</grid>
 	</vlayout>
 </zk>

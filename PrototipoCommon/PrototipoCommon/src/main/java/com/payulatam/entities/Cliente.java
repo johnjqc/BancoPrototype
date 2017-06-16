@@ -1,29 +1,39 @@
 package com.payulatam.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import com.gigaspaces.annotation.pojo.SpaceClass;
+import com.gigaspaces.annotation.pojo.SpaceId;
 
 
 /**
  * The persistent class for the "Cliente" database table.
  * 
  */
-@Entity
-@Table(name="\"Cliente\"")
-@NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
+//@Entity
+@Table(name="\"cliente\"")
+@SpaceClass
+@MappedSuperclass
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="\"Direccion\"")
+	@Column(name="\"direccion\"")
 	private String direccion;
 
 	@Id
 	private Integer id;
 
-	@Column(name="\"Nombre\"")
+	@Column(name="\"nombre\"")
 	private String nombre;
 
-	@Column(name="\"Telefono\"")
+	@Column(name="\"telefono\"")
 	private String telefono;
 
 	public Cliente() {
@@ -37,6 +47,7 @@ public class Cliente implements Serializable {
 		this.direccion = direccion;
 	}
 
+	@SpaceId(autoGenerate=false)
 	public Integer getId() {
 		return this.id;
 	}
