@@ -27,7 +27,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.payulatam.entities.Cliente</value>
+				<value>com.payulatam.entities.Customer</value>
 <!-- 				<value>com.payulatam.entities.Cuenta</value> -->
 <!-- 				<value>com.payulatam.entities.Movimiento</value> -->
 			</list>
@@ -47,47 +47,43 @@
 	<!-- An external data source that will be responsible for persisting changes 
 		done on the cluster that connects to this mirror using Hibernate. -->
 	<bean id="hibernateSpaceDataSource"
-		class="org.openspaces.persistency.hibernate.DefaultHibernateExternalDataSource">
+		class="org.openspaces.persistency.hibernate.StatelessHibernateExternalDataSource">
 		<property name="sessionFactory" ref="sessionFactory" />
-		<property name="initialLoadEntries">
-            <list>
-<!--                 <value>com.payulatam.entities.Cliente</value> -->
-<!-- 				<value>com.payulatam.entities.Cuenta</value> -->
-<!-- 				<value>com.payulatam.entities.Movimiento</value> -->
-            </list>
-        </property>
 	</bean>
 	
 	<bean id="hibernateSpaceSynchronizationEndpoint" class="org.openspaces.persistency.hibernate.DefaultHibernateSpaceSynchronizationEndpointFactoryBean">
     	<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
-	<os-core:space id="prototipo" url="/./prototipo" schema="persistent" external-data-source="hibernateSpaceDataSource">
-<!--         <os-core:properties> -->
-<!--             <props> -->
-<!--                 Use ALL IN CACHE -->
-<!--                 <prop key="space-config.engine.cache_policy">1</prop> -->
-<!--                 <prop key="space-config.external-data-source.usage">read-only</prop> -->
-<!--                 <prop key="cluster-config.cache-loader.external-data-source">true</prop> -->
-<!--                 <prop key="cluster-config.cache-loader.central-data-source">true</prop> -->
-<!--             </props> -->
-<!--         </os-core:properties> -->
-    </os-core:space>
+	<os-core:space id="prototipo" url="/./prototipo" schema="persistent" 
+		external-data-source="hibernateSpaceDataSource" >
+<!-- 		<property name="spaceDataSource" ref="hibernateSpaceDataSource" /> -->
+	</os-core:space>
+	
+<!-- 	<os-core:embedded-space id="space" name="prototipo" schema="persistent" space-data-source="hibernateSpaceDataSource" -->
+<!--               space-sync-endpoint="hibernateSpaceSynchronizationEndpoint" /> -->
+<!-- 	    <os-core:properties> -->
+<!-- 	        <props> -->
+<!-- 	            <prop key="cluster-config.cache-loader.external-data-source">true</prop> -->
+<!-- 	            <prop key="cluster-config.cache-loader.central-data-source">true</prop> -->
+<!-- 	        </props> -->
+<!-- 	    </os-core:properties> -->
+<!-- 	</os-core:embedded-space> -->
 
     <!--
         Defines a distributed transaction manager.
     -->
-     <os-core:distributed-tx-manager id="transactionManager"/>
+<!--      <os-core:distributed-tx-manager id="transactionManager"/> -->
 
     <!--
         OpenSpaces simplified space API built on top of IJSpace/JavaSpace.
     -->
-    <os-core:giga-space id="gigaSpace" space="prototipo" tx-manager="transactionManager"/>
+<!--     <os-core:giga-space id="gigaSpace" space="prototipo" tx-manager="transactionManager"/> -->
 
     <!--
         The data processor bean
     -->
-    <bean id="dataProcessor" class="com.payulatam.pu.Processor"/>
+<!--     <bean id="dataProcessor" class="com.payulatam.pu.Processor"/> -->
    
 
     <!--
