@@ -14,50 +14,39 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 
-import com.payulatam.entities.Cliente;
+import com.payulatam.entities.Customer;
 
 public class ClienteController extends GenericForwardComposer {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
 	
-	private List<Cliente> clientes;
+	private List<Customer> clientes;
 	
 	private Grid customers;
-
+	
 	@Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         
         clientes = new ArrayList<>();
-        GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer("jini://*/*/prototipo")).gigaSpace();
-
-		Cliente[] spaceEntries = gigaSpace.readMultiple(new Cliente(), Integer.MAX_VALUE);
-		
-		for (Cliente cl : spaceEntries) {
-			System.out.println(cl.getNombre());
+        
+        GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer("jini://*/*/prototipo")).create();
+        Customer[] spaceEntries = gigaSpace.readMultiple(new Customer(), Integer.MAX_VALUE);
+        
+		for (Customer cl : spaceEntries) {
 			clientes.add(cl);
 		}
-        
-        
-//        for (int i = 0; i < 3; i++) {
-//        	Cliente cl = new Cliente();
-//        	cl.setNombre("n" + i);
-//			cl.setDireccion("dir" + i);
-//			cl.setTelefono("tel" + i);
-//			clientes.add(cl);
-//		}
         
         ListModelList prodModel = new ListModelList(clientes);
         customers.setModel(prodModel);
         
         customers.setRowRenderer(new RowRenderer() {
             public void render(Row row, Object data) throws Exception {
-                final Cliente prod = (Cliente)data;
-                 
+                final Customer prod = (Customer)data;
                 
-                new Label(prod.getNombre()).setParent(row);
-                new Label(""+prod.getDireccion()).setParent(row);
-                new Label(""+prod.getTelefono()).setParent(row);
+                new Label(prod.getName()).setParent(row);
+                new Label(""+prod.getAddress()).setParent(row);
+                new Label(""+prod.getPhone()).setParent(row);
 //                initOperation(prod).setParent(row);
             }
              

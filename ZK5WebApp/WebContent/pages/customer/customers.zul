@@ -40,7 +40,6 @@
 			<toolbarbutton id="btnEdit" label="${labels.customer.edit}" />
 			<toolbarbutton id="btnDelete" label="${labels.customer.delete}" />
 		</toolbar>
-		<label id="lblNum" value="1" />
 		<grid id="customers" model="@{clientes}">
 			<columns>
 				<column >${labels.customer.customer}</column>

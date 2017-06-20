@@ -1,13 +1,8 @@
 package com.payulatam.prototipo;
 
-import org.openspaces.core.GigaSpace;
-import org.openspaces.core.GigaSpaceConfigurer;
-import org.openspaces.core.space.UrlSpaceConfigurer;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-
-import com.payulatam.entities.Cliente;
 
 /**
  * 
@@ -17,7 +12,7 @@ import com.payulatam.entities.Cliente;
 public class ToolBarNavigation extends GenericForwardComposer {
 
 	private static final long serialVersionUID = -2722298524312259715L;
-
+	
 	/**
 	 * 
 	 * @param evt
@@ -32,11 +27,11 @@ public class ToolBarNavigation extends GenericForwardComposer {
 	 */
 	public void onClick$btnCustomers(Event evt) {
 //		GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer("jini://*/*/prototipo")).gigaSpace();
-
-//		Cliente[] spaceEntries = gigaSpace.readMultiple(new Cliente(), Integer.MAX_VALUE);
-//		for (Cliente cl : spaceEntries) {
-//			System.out.println(cl.getNombre());
+//		Customer[] spaceEntries = gigaSpace.readMultiple(new Customer());
+//		for (Customer cl : spaceEntries) {
+//			System.out.println(cl.getName());
 //		}
+			    
 		Executions.getCurrent().sendRedirect("/pages/customer/customers.zul");
 	}
 
