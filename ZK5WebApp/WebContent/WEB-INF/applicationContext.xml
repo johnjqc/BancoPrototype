@@ -17,23 +17,24 @@
        http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/sla/openspaces-sla.xsd">
 
 
+<!-- 	<os-core:giga-space-context/> -->
     <!--
 		Activates various annotations to be detected in bean classes:
 		Spring's @Required and @Autowired, as well as JSR 250's @Resource.
 	-->
-    <context:annotation-config/>
+<!--     <context:annotation-config/> -->
 
     <!--
 		Instruct Spring to perform declarative transaction management
 		automatically on annotated classes.
 	-->
-	<tx:annotation-driven/>
+<!-- 	<tx:annotation-driven/> -->
 
-    <os-core:space id="space" url="jini:/*/*/prototipo" lookup-timeout="3000"/>
+<!--     <os-core:space id="space" url="jini:/*/*/prototipo" lookup-timeout="3000"/> -->
 
-    <os-core:local-tx-manager id="transactionManager" space="space"/>
+<!--     <os-core:local-tx-manager id="transactionManager" space="space"/> -->
 
-    <os-core:giga-space id="gigaSpace" space="space" tx-manager="transactionManager"/>
+<!--     <os-core:giga-space id="gigaSpace" space="space" tx-manager="transactionManager"/> -->
 
 <!--     <bean id="idGenerator" class="org.springframework.samples.petclinic.gigaspaces.SpaceBasedIdGenerator"/> -->
 
@@ -41,6 +42,8 @@
 
 	<!--<bean id="clinic" class="org.springframework.samples.petclinic.gigaspaces.GigaSpacesClinic"/>-->
 <!-- 	<bean id="clinic" class="org.springframework.samples.petclinic.gigaspaces.ExecutorBasedGigaSpacesClinic"/> -->
-
+	
+<!-- 	<os-core:giga-space-context/> -->
+<!--     <os-remoting:annotation-support/> -->
 
 </beans>
