@@ -15,20 +15,20 @@
 			<rows>
 				<row>
 					<label value="${labels.customer.customer}" />
-					<textbox value="" width="250px" tabindex="1" />
+					<textbox id="textboxCustomer" value="" width="250px" tabindex="1" />
 				</row>
 				<row>
 					<label value="${labels.customer.address}" />
-					<textbox value="" width="250px" tabindex="1" />
+					<textbox id="textboxAddress" value="" width="250px" tabindex="1" />
 				</row>
 				<row>
 					<label value="${labels.customer.phone}" />
-					<textbox value="" width="250px" tabindex="1" />
+					<textbox id="textboxPhone" value="" width="250px" tabindex="1" />
 				</row>
 				<row>
                     <cell colspan="2" style="text-align:center">
                         <vlayout>
-                            <button label="${labels.app.search}" width="100px" height="30px" />
+                            <button id="buttonSearch" label="${labels.app.search}" width="100px" height="30px" />
                         </vlayout>
                     </cell>
                 </row>
@@ -40,7 +40,7 @@
 			<toolbarbutton id="btnEdit" label="${labels.customer.edit}" />
 			<toolbarbutton id="btnDelete" label="${labels.customer.delete}" />
 		</toolbar>
-		<grid id="customers" model="@{clientes}">
+		<grid id="gridCustomers" model="@{clientes}">
 			<columns>
 				<column >${labels.customer.customer}</column>
 				<column >${labels.customer.address}</column>

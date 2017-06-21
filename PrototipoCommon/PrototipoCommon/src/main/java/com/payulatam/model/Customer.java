@@ -1,19 +1,17 @@
-package com.payulatam.entities;
+package com.payulatam.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceRouting;
 
+import java.util.List;
+
 
 /**
- * The persistent class for the "Customer" database table.
+ * The persistent class for the customer database table.
  * 
  */
 @Entity
@@ -22,24 +20,25 @@ import com.gigaspaces.annotation.pojo.SpaceRouting;
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	
-	@Column(name="name")
+
+	private String address;
+
 	private String name;
 
-	@Column(name="phone")
 	private String phone;
-	
-	@Column(name="address")
-	private String address;
-	
-	@Column(name="spacerouting")
+
 	private Integer spacerouting;
+
+	//bi-directional many-to-one association to Account
+	@OneToMany(mappedBy="customer")
+	private List<Account> accounts;
 
 	public Customer() {
 	}
-	
-	@Id
+
 	@SpaceId
 	public Integer getId() {
 		return this.id;
@@ -48,7 +47,15 @@ public class Customer implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -65,22 +72,35 @@ public class Customer implements Serializable {
 		this.phone = phone;
 	}
 
-	public String getAddress() {
-		return this.address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	
-	
 	@SpaceRouting
 	public Integer getSpacerouting() {
-		return spacerouting;
+		return this.spacerouting;
 	}
 
 	public void setSpacerouting(Integer spacerouting) {
 		this.spacerouting = spacerouting;
+	}
+
+	public List<Account> getAccounts() {
+		return this.accounts;
+	}
+
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
+	}
+
+	public Account addAccount(Account account) {
+		getAccounts().add(account);
+		account.setCustomer(this);
+
+		return account;
+	}
+
+	public Account removeAccount(Account account) {
+		getAccounts().remove(account);
+		account.setCustomer(null);
+
+		return account;
 	}
 
 }

@@ -27,9 +27,9 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.payulatam.entities.Customer</value>
-<!-- 				<value>com.payulatam.entities.Cuenta</value> -->
-<!-- 				<value>com.payulatam.entities.Movimiento</value> -->
+				<value>com.payulatam.model.Customer</value>
+				<value>com.payulatam.model.Account</value>
+				<value>com.payulatam.model.Movement</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -57,19 +57,8 @@
 	
 	<os-core:space id="prototipo" url="/./prototipo" schema="persistent" 
 		external-data-source="hibernateSpaceDataSource" >
-<!-- 		<property name="spaceDataSource" ref="hibernateSpaceDataSource" /> -->
 	</os-core:space>
 	
-<!-- 	<os-core:embedded-space id="space" name="prototipo" schema="persistent" space-data-source="hibernateSpaceDataSource" -->
-<!--               space-sync-endpoint="hibernateSpaceSynchronizationEndpoint" /> -->
-<!-- 	    <os-core:properties> -->
-<!-- 	        <props> -->
-<!-- 	            <prop key="cluster-config.cache-loader.external-data-source">true</prop> -->
-<!-- 	            <prop key="cluster-config.cache-loader.central-data-source">true</prop> -->
-<!-- 	        </props> -->
-<!-- 	    </os-core:properties> -->
-<!-- 	</os-core:embedded-space> -->
-
     <!--
         Defines a distributed transaction manager.
     -->
