@@ -22,7 +22,9 @@ public class CustomerDetailController extends GenericForwardComposer {
 	private Textbox textboxCustomer;
 	private Textbox textboxAddress;
 	private Textbox textboxPhone;
-	private Button buttonAction;
+	private Button buttonEdit;
+	private Button buttonNew;
+	
 	
 	@Override
     public void doAfterCompose(Component comp) throws Exception {
@@ -34,9 +36,9 @@ public class CustomerDetailController extends GenericForwardComposer {
         String id = execution.getParameter("id");
         
         if (id == null || id.isEmpty()) {
-        	buttonAction.setLabel("Crear");
+        	buttonNew.setVisible(true);
         } else {
-        	buttonAction.setLabel("Editar");
+        	buttonEdit.setVisible(true);
         	actualCustomer = gigaSpace.readById(Customer.class, Integer.parseInt(id));
         	if (actualCustomer != null) {
         		textboxCustomer.setText(actualCustomer.getName());
@@ -46,7 +48,19 @@ public class CustomerDetailController extends GenericForwardComposer {
         }
 	}
 	
-	public void onClick$buttonAction() {
+	public void onClick$buttonNew() {
+		actualCustomer = new Customer();
+		
+		actualCustomer.setName(textboxCustomer.getText());
+		actualCustomer.setAddress(textboxAddress.getText());
+		actualCustomer.setPhone(textboxPhone.getText());
+		actualCustomer.setSpacerouting(1);
+		GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer(Constantes.JINI)).gigaSpace();
+		gigaSpace.write(actualCustomer);
+		Executions.sendRedirect("/pages/customer/customers.zul");
+	}
+	
+	public void onClick$buttonEdit() {
 		actualCustomer.setName(textboxCustomer.getText());
 		actualCustomer.setAddress(textboxAddress.getText());
 		actualCustomer.setPhone(textboxPhone.getText());

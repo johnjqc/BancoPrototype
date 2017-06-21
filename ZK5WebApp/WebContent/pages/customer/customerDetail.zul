@@ -29,8 +29,10 @@
 				<row>
                     <cell colspan="2" style="text-align:center">
                         <vlayout>
-                            <button id="buttonAction" label="${labels.app.search}" width="100px" 
-                            	height="30px" />
+                            <button id="buttonEdit" label="Editar" width="100px" 
+                            	height="30px" visible="false" />
+                            <button id="buttonNew" label="Crear" width="100px" 
+                            	height="30px" visible="false" />
                         </vlayout>
                     </cell>
                 </row>
