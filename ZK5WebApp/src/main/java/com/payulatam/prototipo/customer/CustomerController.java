@@ -1,4 +1,4 @@
-package com.payulatam.prototipo;
+package com.payulatam.prototipo.customer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,12 @@ import org.openspaces.core.GigaSpace;
 import org.openspaces.core.GigaSpaceConfigurer;
 import org.openspaces.core.space.UrlSpaceConfigurer;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Cell;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
@@ -19,9 +24,11 @@ import com.j_spaces.core.client.SQLQuery;
 import com.payulatam.common.Constantes;
 import com.payulatam.model.Customer;
 
-public class ClienteController extends GenericForwardComposer {
+public class CustomerController extends GenericForwardComposer {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
+	
+	private ListModelList prodModel;
 	
 	private Grid gridCustomers;
 	private Textbox textboxCustomer;
@@ -44,6 +51,29 @@ public class ClienteController extends GenericForwardComposer {
                 new Label(prod.getName()).setParent(row);
                 new Label(prod.getAddress()).setParent(row);
                 new Label(prod.getPhone()).setParent(row);
+                
+                Cell buttons = new Cell();
+                buttons.setParent(row);
+                
+                Button btnRemove = new Button();
+                btnRemove.setImage("/images/icon-delete.png");
+            	btnRemove.addEventListener("onClick", new EventListener() {
+            		public void onEvent(Event event) {
+            			gigaSpace.takeIfExistsById(Customer.class, prod.getId());
+            			prodModel.remove(prod);
+            		}
+            	});
+            	btnRemove.setParent(buttons);
+            	
+            	Button btnEdit = new Button();
+                btnEdit.setImage("/images/icon-edit.png");
+            	btnEdit.addEventListener("onClick", new EventListener() {
+            		public void onEvent(Event event) {
+            			Executions.sendRedirect("/pages/customer/customerDetail.zul?id=" + prod.getId());
+            		}
+            	});
+            	btnEdit.setParent(buttons);
+            	
             }
         });
     }
@@ -80,7 +110,6 @@ public class ClienteController extends GenericForwardComposer {
 			}
 		}
 		SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, stringQuery.toString());
-		System.out.println(stringQuery.toString());
 		
 		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
 		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
@@ -93,8 +122,12 @@ public class ClienteController extends GenericForwardComposer {
 		for (Customer customer : customers) {
 			customerResult.add(customer);
 		}
-		ListModelList prodModel = new ListModelList(customerResult);
+		prodModel = new ListModelList(customerResult);
 		gridCustomers.setModel(prodModel);
+	}
+	
+	public void onClick$btnNew() {
+		Executions.sendRedirect("/pages/customer/customerDetail.zul");
 	}
 	
 }

@@ -13,10 +13,10 @@ import com.payulatam.common.Constantes;
  */
 public class GigaSpaceController {
 	
-	public static GigaSpace getGigaSpace() {
-		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
-		return gigaSpace;
-	}
+//	public static GigaSpace getGigaSpace() {
+//		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
+//		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
+//		return gigaSpace;
+//	}
 
 }

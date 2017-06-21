@@ -26,12 +26,6 @@ public class ToolBarNavigation extends GenericForwardComposer {
 	 * @param evt
 	 */
 	public void onClick$btnCustomers(Event evt) {
-//		GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer("jini://*/*/prototipo")).gigaSpace();
-//		Customer[] spaceEntries = gigaSpace.readMultiple(new Customer());
-//		for (Customer cl : spaceEntries) {
-//			System.out.println(cl.getName());
-//		}
-			    
 		Executions.getCurrent().sendRedirect("/pages/customer/customers.zul");
 	}
 
