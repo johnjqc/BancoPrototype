@@ -8,7 +8,7 @@
 <zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native">
 	<include self="@{define(toolbar)}" src="/WEB-INF/layout/toolbar.zul"/>
 	<vlayout self="@{define(content)}" xmlns:n="native" 
-		apply="com.payulatam.prototipo.account.AccountController">
+		apply="com.payulatam.prototipo.account.AccountDetailController">
 		<grid>
 			<columns>
 				<column  width="150px" />
@@ -17,35 +17,27 @@
 			<rows>
 				<row>
 					<label value="${labels.customer.id}" />
-					<textbox id="" value="" width="250px" tabindex="1" />
+					<textbox value="" width="250px" tabindex="1" />
 				</row>
 				<row>
 					<label value="${labels.account.number}" />
-					<textbox id="textboxNumber" value="" width="250px" tabindex="1" />
+					<textbox value="" width="250px" tabindex="1" />
 				</row>
 				<row>
 					<label value="${labels.account.balance}" />
-					<textbox id="textboxBalance" value="" width="250px" tabindex="1" />
+					<textbox value="" width="250px" tabindex="1" />
 				</row>
 				<row>
                     <cell colspan="2" style="text-align:center">
                         <vlayout>
-                            <button label="${labels.app.search}" width="100px" height="30px" />
+                            <button id="buttonEdit" label="Editar" width="100px" 
+                            	height="30px" visible="false" />
+                            <button id="buttonNew" label="Crear" width="100px" 
+                            	height="30px" visible="false" />
                         </vlayout>
                     </cell>
                 </row>
 			</rows>
-		</grid>
-		<toolbar apply="">
-			<toolbarbutton id="btnNew" label="${labels.account.new}" image="/images/icon-new.png" />
-		</toolbar>
-		<grid id="gridAccounts">
-			<columns>
-				<column width="150px" >${labels.customer.id}</column>
-				<column  >${labels.account.number}</column>
-				<column  >${labels.account.balance}</column>
-				<column  />
-			</columns>
 		</grid>
 	</vlayout>
 </zk>
