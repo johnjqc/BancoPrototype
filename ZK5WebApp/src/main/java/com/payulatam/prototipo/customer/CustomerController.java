@@ -3,9 +3,6 @@ package com.payulatam.prototipo.customer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openspaces.core.GigaSpace;
-import org.openspaces.core.GigaSpaceConfigurer;
-import org.openspaces.core.space.UrlSpaceConfigurer;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -21,8 +18,8 @@ import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.common.Constantes;
 import com.payulatam.model.Customer;
+import com.payulatam.prototipo.tools.GigaSpaceController;
 
 public class CustomerController extends GenericForwardComposer {
 	
@@ -39,9 +36,8 @@ public class CustomerController extends GenericForwardComposer {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         
-        UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
-        Customer[] spaceEntries = gigaSpace.readMultiple(new Customer(), Integer.MAX_VALUE);
+        SQLQuery<Customer> query = new SQLQuery<>(Customer.class,"rownum < 10 ORDER BY name");
+        Customer[] spaceEntries = GigaSpaceController.getGigaSpace().readMultiple(query);
         setModel(spaceEntries);
         
         gridCustomers.setRowRenderer(new RowRenderer() {
@@ -59,7 +55,7 @@ public class CustomerController extends GenericForwardComposer {
                 btnRemove.setImage("/images/icon-delete.png");
             	btnRemove.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
-            			gigaSpace.takeIfExistsById(Customer.class, prod.getId());
+            			GigaSpaceController.getGigaSpace().takeIfExistsById(Customer.class, prod.getId());
             			prodModel.remove(prod);
             		}
             	});
@@ -69,7 +65,9 @@ public class CustomerController extends GenericForwardComposer {
                 btnEdit.setImage("/images/icon-edit.png");
             	btnEdit.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
-            			Executions.sendRedirect("/pages/customer/customerDetail.zul?id=" + prod.getId());
+            			String id = prod.getId();
+            			id = id.replaceAll("\\^", ".");
+            			Executions.sendRedirect("/pages/customer/customerDetail.zul?id=" + id);
             		}
             	});
             	btnEdit.setParent(buttons);
@@ -109,11 +107,12 @@ public class CustomerController extends GenericForwardComposer {
 				stringQuery.append(String.format(" phone = '%s' ", textboxPhone.getText()));
 			}
 		}
+		stringQuery.append(" ORDER BY name");
 		SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, stringQuery.toString());
 		
-		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
-		Customer[] result = gigaSpace.readMultiple(query);
+//		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
+//		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
+		Customer[] result = GigaSpaceController.getGigaSpace().readMultiple(query);
 		setModel(result);
 	}
 	

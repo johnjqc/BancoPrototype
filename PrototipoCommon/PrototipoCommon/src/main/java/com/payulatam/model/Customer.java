@@ -1,13 +1,17 @@
 package com.payulatam.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceRouting;
-
-import java.util.List;
 
 
 /**
@@ -20,9 +24,9 @@ import java.util.List;
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="customer_id_seq")
+	@SequenceGenerator(name="customer_id_seq", sequenceName="customer_id_seq", allocationSize=1)
+	private String id;
 
 	private String address;
 
@@ -31,23 +35,20 @@ public class Customer implements Serializable {
 	private String phone;
 
 	private Integer spacerouting;
-
-	//bi-directional many-to-one association to Account
-	@OneToMany(mappedBy="customer")
-	private List<Account> accounts;
-
+	
 	public Customer() {
 	}
 
-	@SpaceId
-	public Integer getId() {
+	@Id
+	@SpaceId(autoGenerate = true)
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-
+	
 	public String getAddress() {
 		return this.address;
 	}
@@ -81,26 +82,10 @@ public class Customer implements Serializable {
 		this.spacerouting = spacerouting;
 	}
 
-	public List<Account> getAccounts() {
-		return this.accounts;
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", address=" + address + ", name=" + name + ", phone=" + phone + ", spacerouting="
+				+ spacerouting + "]";
 	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
-	}
-
-	public Account addAccount(Account account) {
-		getAccounts().add(account);
-		account.setCustomer(this);
-
-		return account;
-	}
-
-	public Account removeAccount(Account account) {
-		getAccounts().remove(account);
-		account.setCustomer(null);
-
-		return account;
-	}
-
+	
 }

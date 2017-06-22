@@ -1,8 +1,5 @@
 package com.payulatam.prototipo.customer;
 
-import org.openspaces.core.GigaSpace;
-import org.openspaces.core.GigaSpaceConfigurer;
-import org.openspaces.core.space.UrlSpaceConfigurer;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -10,8 +7,8 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Textbox;
 
-import com.payulatam.common.Constantes;
 import com.payulatam.model.Customer;
+import com.payulatam.prototipo.tools.GigaSpaceController;
 
 public class CustomerDetailController extends GenericForwardComposer {
 
@@ -30,8 +27,6 @@ public class CustomerDetailController extends GenericForwardComposer {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer(Constantes.JINI)).gigaSpace();
-        
         Execution execution = Executions.getCurrent();
         String id = execution.getParameter("id");
         
@@ -39,7 +34,8 @@ public class CustomerDetailController extends GenericForwardComposer {
         	buttonNew.setVisible(true);
         } else {
         	buttonEdit.setVisible(true);
-        	actualCustomer = gigaSpace.readById(Customer.class, Integer.parseInt(id));
+        	id = id.replaceAll("\\.", "^");
+        	actualCustomer = GigaSpaceController.getGigaSpace().readById(Customer.class, id);
         	if (actualCustomer != null) {
         		textboxCustomer.setText(actualCustomer.getName());
         		textboxAddress.setText(actualCustomer.getAddress());
@@ -50,13 +46,11 @@ public class CustomerDetailController extends GenericForwardComposer {
 	
 	public void onClick$buttonNew() {
 		actualCustomer = new Customer();
-		
 		actualCustomer.setName(textboxCustomer.getText());
 		actualCustomer.setAddress(textboxAddress.getText());
 		actualCustomer.setPhone(textboxPhone.getText());
 		actualCustomer.setSpacerouting(1);
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer(Constantes.JINI)).gigaSpace();
-		gigaSpace.write(actualCustomer);
+		GigaSpaceController.getGigaSpace().write(actualCustomer);
 		Executions.sendRedirect("/pages/customer/customers.zul");
 	}
 	
@@ -64,8 +58,7 @@ public class CustomerDetailController extends GenericForwardComposer {
 		actualCustomer.setName(textboxCustomer.getText());
 		actualCustomer.setAddress(textboxAddress.getText());
 		actualCustomer.setPhone(textboxPhone.getText());
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer(Constantes.JINI)).gigaSpace();
-		gigaSpace.write(actualCustomer);
+		GigaSpaceController.getGigaSpace().write(actualCustomer);
 		Executions.sendRedirect("/pages/customer/customers.zul");
 	}
 	
