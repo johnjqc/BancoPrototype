@@ -41,7 +41,8 @@ public class AccountDetailController extends GenericForwardComposer {
         	buttonNew.setVisible(true);
         } else {
         	buttonEdit.setVisible(true);
-        	actualAccount = gigaSpace.readById(Account.class, Integer.parseInt(id));
+        	id = id.replaceAll("\\.", "^");
+        	actualAccount = gigaSpace.readById(Account.class, id);
         	if (actualAccount != null) {
 //        		textboxCustomer.setText(actualAccount.getName());
         		textboxNumber.setText(actualAccount.getNumber());

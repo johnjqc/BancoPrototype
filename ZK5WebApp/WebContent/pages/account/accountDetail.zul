@@ -17,15 +17,15 @@
 			<rows>
 				<row>
 					<label value="${labels.customer.id}" />
-					<textbox value="" width="250px" tabindex="1" />
+					<combobox value="" width="250px" tabindex="1" />
 				</row>
 				<row>
 					<label value="${labels.account.number}" />
-					<textbox value="" width="250px" tabindex="1" />
+					<textbox id="textboxNumber" width="250px" tabindex="1" />
 				</row>
 				<row>
 					<label value="${labels.account.balance}" />
-					<textbox value="" width="250px" tabindex="1" />
+					<textbox id="textboxBalance" width="250px" tabindex="1" />
 				</row>
 				<row>
                     <cell colspan="2" style="text-align:center">

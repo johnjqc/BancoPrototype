@@ -13,6 +13,8 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Cell;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
@@ -23,6 +25,8 @@ import org.zkoss.zul.Textbox;
 import com.j_spaces.core.client.SQLQuery;
 import com.payulatam.common.Constantes;
 import com.payulatam.model.Account;
+import com.payulatam.model.Customer;
+import com.payulatam.prototipo.tools.GigaSpaceController;
 
 public class AccountController extends GenericForwardComposer {
 	
@@ -31,6 +35,7 @@ public class AccountController extends GenericForwardComposer {
 	private ListModelList prodModel;
 	
 	private Grid gridAccounts;
+	private Combobox comboboxCustomer;
 	private Textbox textboxNumber;
 	private Textbox textboxBalance;
 	
@@ -38,15 +43,31 @@ public class AccountController extends GenericForwardComposer {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         
-        UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
-		Account[] spaceEntries = gigaSpace.readMultiple(new Account(), Integer.MAX_VALUE);
-        setModel(spaceEntries);
+        Comboitem comboitemDefault = new Comboitem();
+        comboitemDefault.setValue("*");
+        comboitemDefault.setLabel("*");
+        comboitemDefault.setParent(comboboxCustomer);
+        comboboxCustomer.setSelectedItem(comboitemDefault);
+    	
+        SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, "ORDER BY name");
+        Customer[] customers = GigaSpaceController.getGigaSpace().readMultiple(query);
+        for (int i = 0; i < customers.length; i++) {
+        	Comboitem comboitem = new Comboitem();
+        	comboitem.setValue(customers[i].getId());
+        	comboitem.setLabel(customers[i].getName());
+        	comboitem.setParent(comboboxCustomer);
+		}
+        
+        textboxNumber.setText("*");
+        textboxBalance.setText("*");
         
         gridAccounts.setRowRenderer(new RowRenderer() {
             public void render(Row row, Object data) throws Exception {
                 final Account prod = (Account)data;
                 
+                Customer customers = GigaSpaceController.getGigaSpace().readById(Customer.class, prod.getCustomerId());
+                		
+                new Label(customers.getName()).setParent(row);
                 new Label(prod.getNumber()).setParent(row);
                 new Label(prod.getBalance().toString()).setParent(row);
                 
@@ -57,7 +78,7 @@ public class AccountController extends GenericForwardComposer {
                 btnRemove.setImage("/images/icon-delete.png");
             	btnRemove.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
-            			gigaSpace.takeIfExistsById(Account.class, prod.getId());
+            			GigaSpaceController.getGigaSpace().takeIfExistsById(Account.class, prod.getId());
             			prodModel.remove(prod);
             		}
             	});
@@ -67,24 +88,34 @@ public class AccountController extends GenericForwardComposer {
                 btnEdit.setImage("/images/icon-edit.png");
             	btnEdit.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
-            			Executions.sendRedirect("/pages/account/accountDetail.zul?id=" + prod.getId());
+            			String id = prod.getId();
+            			id = id.replaceAll("\\^", ".");
+            			Executions.sendRedirect("/pages/account/accountDetail.zul?id=" + id);
             		}
             	});
             	btnEdit.setParent(buttons);
-            	
             }
         });
     }
 	
 	public void onClick$buttonSearch() {
 		StringBuilder stringQuery = new StringBuilder();
+		
+		Comboitem itemCustomer = comboboxCustomer.getSelectedItem();
+		if (itemCustomer != null && !"*".equals(itemCustomer.getValue())) {
+			stringQuery.append("customerId = '" + itemCustomer.getValue() + "'");
+		}
+		
 		if (!"*".equals(textboxNumber.getText()) && !textboxNumber.getText().isEmpty()) {
+			if (!stringQuery.toString().isEmpty()) {
+				stringQuery.append(" and ");
+			}
 			if (textboxNumber.getText().contains("*")) {
 				String toReplace = textboxNumber.getText(); 
 				toReplace = toReplace.replaceAll("\\*", "\\%");
-				stringQuery.append(String.format(" name like '%s' ", toReplace));
+				stringQuery.append(String.format(" number like '%s' ", toReplace));
 			} else {
-				stringQuery.append(String.format(" name = '%s' ", textboxNumber.getText()));
+				stringQuery.append(String.format(" number = '%s' ", textboxNumber.getText()));
 			}
 		}
 		if (!"*".equals(textboxBalance.getText()) && !textboxBalance.getText().isEmpty()) {
@@ -92,11 +123,12 @@ public class AccountController extends GenericForwardComposer {
 				stringQuery.append(" and ");
 			}
 			if (textboxBalance.getText().contains("*")) {
-				stringQuery.append(String.format(" address like '%s' ", textboxBalance.getText().replaceAll("\\*", "\\%")));
+				stringQuery.append(String.format(" balance like '%s' ", textboxBalance.getText().replaceAll("\\*", "\\%")));
 			} else {
-				stringQuery.append(String.format(" address = '%s' ", textboxBalance.getText()));
+				stringQuery.append(String.format(" balance = '%s' ", textboxBalance.getText()));
 			}
 		}
+//		stringQuery.append(" ORDER BY number");
 		SQLQuery<Account> query = new SQLQuery<>(Account.class, stringQuery.toString());
 		
 		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);

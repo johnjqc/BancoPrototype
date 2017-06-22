@@ -6,7 +6,6 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layout/template.zul" ?>
 
 <zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native">
-	<include self="@{define(toolbar)}" src="/WEB-INF/layout/toolbar.zul"/>
 	<vlayout self="@{define(content)}" xmlns:n="native" 
 		apply="com.payulatam.prototipo.account.AccountController">
 		<grid>
@@ -17,20 +16,20 @@
 			<rows>
 				<row>
 					<label value="${labels.customer.id}" />
-					<textbox id="" value="" width="250px" tabindex="1" />
+					<combobox id="comboboxCustomer" width="250px" tabindex="1" />
 				</row>
 				<row>
 					<label value="${labels.account.number}" />
-					<textbox id="textboxNumber" value="" width="250px" tabindex="1" />
+					<textbox id="textboxNumber" width="250px" tabindex="1" />
 				</row>
 				<row>
 					<label value="${labels.account.balance}" />
-					<textbox id="textboxBalance" value="" width="250px" tabindex="1" />
+					<textbox id="textboxBalance" width="250px" tabindex="1" />
 				</row>
 				<row>
                     <cell colspan="2" style="text-align:center">
                         <vlayout>
-                            <button label="${labels.app.search}" width="100px" height="30px" />
+                            <button id="buttonSearch" label="${labels.app.search}" width="100px" height="30px" />
                         </vlayout>
                     </cell>
                 </row>
@@ -39,7 +38,7 @@
 		<toolbar apply="">
 			<toolbarbutton id="btnNew" label="${labels.account.new}" image="/images/icon-new.png" />
 		</toolbar>
-		<grid id="gridAccounts">
+		<grid id="gridAccounts" mold="paging" pagingPosition="both" pageSize="10">
 			<columns>
 				<column width="150px" >${labels.customer.id}</column>
 				<column  >${labels.account.number}</column>

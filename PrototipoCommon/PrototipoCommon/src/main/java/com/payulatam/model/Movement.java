@@ -1,14 +1,19 @@
 package com.payulatam.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceRouting;
-
-import java.math.BigDecimal;
-import java.util.Date;
+import com.payulatam.enums.MovementType;
 
 
 /**
@@ -21,33 +26,27 @@ import java.util.Date;
 public class Movement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private String id;
 
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
 	private Integer spacerouting;
 
-	private String type;
+	private MovementType type;
 
 	private BigDecimal value;
-
-	//bi-directional many-to-one association to Account
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="account_id")
-	private Account account;
 
 	public Movement() {
 	}
 
-	@SpaceId
-	public Integer getId() {
+	@Id
+	@SpaceId(autoGenerate = true)
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -68,11 +67,11 @@ public class Movement implements Serializable {
 		this.spacerouting = spacerouting;
 	}
 
-	public String getType() {
+	public MovementType getType() {
 		return this.type;
 	}
 
-	public void setType(String type) {
+	public void setType(MovementType type) {
 		this.type = type;
 	}
 
@@ -82,14 +81,6 @@ public class Movement implements Serializable {
 
 	public void setValue(BigDecimal value) {
 		this.value = value;
-	}
-
-	public Account getAccount() {
-		return this.account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 
 }

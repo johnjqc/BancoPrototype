@@ -1,14 +1,15 @@
 package com.payulatam.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.math.BigDecimal;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceRouting;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -21,9 +22,9 @@ import java.util.List;
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private String id;
+	
+	private String customerId;
 
 	private BigDecimal balance;
 
@@ -31,25 +32,26 @@ public class Account implements Serializable {
 
 	private Integer spacerouting;
 
-	//bi-directional many-to-one association to Customer
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="customer_id")
-	private Customer customer;
-
-	//bi-directional many-to-one association to Movement
-	@OneToMany(mappedBy="account")
-	private List<Movement> movements;
 
 	public Account() {
 	}
 
-	@SpaceId
-	public Integer getId() {
+	@Id
+	@SpaceId(autoGenerate = true)
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 
 	public BigDecimal getBalance() {
@@ -75,36 +77,6 @@ public class Account implements Serializable {
 
 	public void setSpacerouting(Integer spacerouting) {
 		this.spacerouting = spacerouting;
-	}
-
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public List<Movement> getMovements() {
-		return this.movements;
-	}
-
-	public void setMovements(List<Movement> movements) {
-		this.movements = movements;
-	}
-
-	public Movement addMovement(Movement movement) {
-		getMovements().add(movement);
-		movement.setAccount(this);
-
-		return movement;
-	}
-
-	public Movement removeMovement(Movement movement) {
-		getMovements().remove(movement);
-		movement.setAccount(null);
-
-		return movement;
 	}
 
 }

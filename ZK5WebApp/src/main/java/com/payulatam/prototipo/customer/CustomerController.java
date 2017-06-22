@@ -36,9 +36,9 @@ public class CustomerController extends GenericForwardComposer {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         
-        SQLQuery<Customer> query = new SQLQuery<>(Customer.class,"rownum < 10 ORDER BY name");
-        Customer[] spaceEntries = GigaSpaceController.getGigaSpace().readMultiple(query);
-        setModel(spaceEntries);
+        textboxCustomer.setText("*");
+        textboxAddress.setText("*");
+        textboxPhone.setText("*");
         
         gridCustomers.setRowRenderer(new RowRenderer() {
             public void render(Row row, Object data) throws Exception {
