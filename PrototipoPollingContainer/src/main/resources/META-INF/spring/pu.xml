@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:os-core="http://www.openspaces.org/schema/core"
+    xmlns:os-events="http://www.openspaces.org/schema/events"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.openspaces.org/schema/core http://www.openspaces.org/schema/10.0/core/openspaces-core.xsd">
+
+	
+	
+
+    <!--
+        OpenSpaces simplified space API built on top of IJSpace/JavaSpace.
+    -->
+    <os-core:giga-space id="gigaSpace" space="prototipo" tx-manager="transactionManager"/>
+
+    <!-- Enable scan for OpenSpaces and Spring components -->
+<!-- 	<context:component-scan base-package="com.payultam"/> -->
+	
+	<!-- Enable support for @Polling annotation -->
+<!-- 	<os-events:annotation-support /> -->
+	
+	<os-core:embedded-space id="space" name="prototipo"/>
+	
+	<os-core:distributed-tx-manager id="transactionManager" />
+	
+	<os-core:giga-space id="gigaSpace" space="prototipo" tx-manager="transactionManager"/>
+
+
+</beans>
