@@ -6,7 +6,51 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layout/template.zul" ?>
 
 <zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native">
-	<vlayout self="@{define(content)}" xmlns:n="native" >
-		Movements
+	<vlayout self="@{define(content)}" xmlns:n="native" 
+		apply="com.payulatam.prototipo.movement.MovementController">
+		<grid>
+			<columns>
+				<column  width="150px" />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<label value="${labels.account.number}" />
+					<combobox id="comboboxAccount" width="250px" tabindex="1" />
+				</row>
+				<row>
+					<label value="${labels.movement.type}" />
+					<combobox id="comboboxType" width="250px" tabindex="1" />
+				</row>
+				<row>
+					<label value="${labels.movement.date}" />
+					<datebox id="dateboxDate" width="250px" tabindex="1" />
+				</row>
+				
+				<row>
+					<label value="${labels.movement.value}" />
+					<decimalbox format="###############.##" id="decimalboxValue" width="250px" tabindex="1" />
+				</row>
+				<row>
+                    <cell colspan="2" style="text-align:center">
+                        <vlayout>
+                            <button id="buttonSearch" label="${labels.app.search}" width="100px" height="30px" />
+                        </vlayout>
+                    </cell>
+                </row>
+			</rows>
+		</grid>
+		<toolbar apply="">
+			<toolbarbutton id="btnNew" label="${labels.account.new}" image="/images/icon-new.png" />
+		</toolbar>
+		<grid id="gridMovements" mold="paging" pagingPosition="both" pageSize="10">
+			<columns>
+				<column width="150px" >${labels.account.number}</column>
+				<column  >${labels.movement.type}</column>
+				<column  >${labels.movement.date}</column>
+				<column  >${labels.movement.value}</column>
+				<column />
+			</columns>
+		</grid>
 	</vlayout>
 </zk>

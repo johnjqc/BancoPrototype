@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -13,7 +15,6 @@ import javax.persistence.TemporalType;
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceRouting;
-import com.payulatam.enums.MovementType;
 
 
 /**
@@ -33,9 +34,12 @@ public class Movement implements Serializable {
 
 	private Integer spacerouting;
 
-	private MovementType type;
+	@Enumerated(EnumType.STRING)
+	private String type;
 
 	private BigDecimal value;
+	
+	private String accountId;
 
 	public Movement() {
 	}
@@ -67,11 +71,11 @@ public class Movement implements Serializable {
 		this.spacerouting = spacerouting;
 	}
 
-	public MovementType getType() {
+	public String getType() {
 		return this.type;
 	}
 
-	public void setType(MovementType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -83,4 +87,12 @@ public class Movement implements Serializable {
 		this.value = value;
 	}
 
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+	
 }

@@ -15,6 +15,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Cell;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
@@ -37,7 +38,7 @@ public class AccountController extends GenericForwardComposer {
 	private Grid gridAccounts;
 	private Combobox comboboxCustomer;
 	private Textbox textboxNumber;
-	private Textbox textboxBalance;
+	private Decimalbox decimalboxBalance;
 	
 	@Override
     public void doAfterCompose(Component comp) throws Exception {
@@ -59,7 +60,6 @@ public class AccountController extends GenericForwardComposer {
 		}
         
         textboxNumber.setText("*");
-        textboxBalance.setText("*");
         
         gridAccounts.setRowRenderer(new RowRenderer() {
             public void render(Row row, Object data) throws Exception {
@@ -118,15 +118,11 @@ public class AccountController extends GenericForwardComposer {
 				stringQuery.append(String.format(" number = %s ", textboxNumber.getText()));
 			}
 		}
-		if (!"*".equals(textboxBalance.getText()) && !textboxBalance.getText().isEmpty()) {
+		if (decimalboxBalance.getValue() != null) {
 			if (!stringQuery.toString().isEmpty()) {
 				stringQuery.append(" and ");
 			}
-			if (textboxBalance.getText().contains("*")) {
-				stringQuery.append(String.format(" balance like '%s' ", textboxBalance.getText().replaceAll("\\*", "\\%")));
-			} else {
-				stringQuery.append(String.format(" balance = '%s' ", textboxBalance.getText()));
-			}
+			stringQuery.append(String.format(" balance = %s ", decimalboxBalance.getValue()));
 		}
 //		stringQuery.append(" ORDER BY number");
 		SQLQuery<Account> query = new SQLQuery<>(Account.class, stringQuery.toString());
