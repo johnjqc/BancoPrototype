@@ -2,18 +2,19 @@ package com.payulatam.prototipo.account;
 
 import java.math.BigDecimal;
 
-import org.openspaces.core.GigaSpace;
-import org.openspaces.core.GigaSpaceConfigurer;
-import org.openspaces.core.space.UrlSpaceConfigurer;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Textbox;
 
-import com.payulatam.common.Constantes;
+import com.j_spaces.core.client.SQLQuery;
 import com.payulatam.model.Account;
+import com.payulatam.model.Customer;
+import com.payulatam.prototipo.tools.GigaSpaceController;
 
 public class AccountDetailController extends GenericForwardComposer {
 
@@ -21,7 +22,7 @@ public class AccountDetailController extends GenericForwardComposer {
 	
 	private Account actualAccount;
 	
-	private Textbox textboxCustomer;
+	private Combobox comboboxCustomer;
 	private Textbox textboxNumber;
 	private Textbox textboxBalance;
 	private Button buttonEdit;
@@ -32,7 +33,17 @@ public class AccountDetailController extends GenericForwardComposer {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer(Constantes.JINI)).gigaSpace();
+		SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, "ORDER BY name");
+        Customer[] customers = GigaSpaceController.getGigaSpace().readMultiple(query);
+        for (int i = 0; i < customers.length; i++) {
+        	Comboitem comboitem = new Comboitem();
+        	comboitem.setValue(customers[i].getId());
+        	comboitem.setLabel(customers[i].getName());
+        	comboitem.setParent(comboboxCustomer);
+		}
+        if (customers != null && customers.length > 0) {
+        	comboboxCustomer.setSelectedIndex(0);
+        }
         
         Execution execution = Executions.getCurrent();
         String id = execution.getParameter("id");
@@ -42,9 +53,15 @@ public class AccountDetailController extends GenericForwardComposer {
         } else {
         	buttonEdit.setVisible(true);
         	id = id.replaceAll("\\.", "^");
-        	actualAccount = gigaSpace.readById(Account.class, id);
+        	actualAccount = GigaSpaceController.getGigaSpace().readById(Account.class, id);
         	if (actualAccount != null) {
-//        		textboxCustomer.setText(actualAccount.getName());
+        		int indexItem = 0;
+        		for (int i = 0; i < customers.length; i++) {
+        			if (customers[i].getId().equals(actualAccount.getCustomerId())) {
+        				indexItem = i;
+        			}
+        		}
+        		comboboxCustomer.setSelectedIndex(indexItem);
         		textboxNumber.setText(actualAccount.getNumber());
         		textboxBalance.setText(actualAccount.getBalance().toString());
         	}
@@ -54,22 +71,20 @@ public class AccountDetailController extends GenericForwardComposer {
 	public void onClick$buttonNew() {
 		actualAccount = new Account();
 		
-//		actualAccount.setName(textboxCustomer.getText());
 		actualAccount.setNumber(textboxNumber.getText());
 		actualAccount.setBalance(new BigDecimal(textboxBalance.getText()));
+		actualAccount.setCustomerId("" + comboboxCustomer.getSelectedItem().getValue());
 		actualAccount.setSpacerouting(1);
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer(Constantes.JINI)).gigaSpace();
-		gigaSpace.write(actualAccount);
-		Executions.sendRedirect("/pages/customer/customers.zul");
+		GigaSpaceController.getGigaSpace().write(actualAccount);
+		Executions.sendRedirect("/pages/account/account.zul");
 	}
 	
 	public void onClick$buttonEdit() {
-//		actualAccount.setName(textboxCustomer.getText());
 		actualAccount.setNumber(textboxNumber.getText());
 		actualAccount.setBalance(new BigDecimal(textboxBalance.getText()));
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(new UrlSpaceConfigurer(Constantes.JINI)).gigaSpace();
-		gigaSpace.write(actualAccount);
-		Executions.sendRedirect("/pages/customer/customers.zul");
+		actualAccount.setCustomerId("" + comboboxCustomer.getSelectedItem().getValue());
+		GigaSpaceController.getGigaSpace().write(actualAccount);
+		Executions.sendRedirect("/pages/account/account.zul");
 	}
 	
 }

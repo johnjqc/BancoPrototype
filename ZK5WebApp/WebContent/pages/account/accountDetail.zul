@@ -17,7 +17,7 @@
 			<rows>
 				<row>
 					<label value="${labels.customer.id}" />
-					<combobox value="" width="250px" tabindex="1" />
+					<combobox id="comboboxCustomer" width="250px" tabindex="1" />
 				</row>
 				<row>
 					<label value="${labels.account.number}" />

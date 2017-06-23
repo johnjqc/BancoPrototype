@@ -113,9 +113,9 @@ public class AccountController extends GenericForwardComposer {
 			if (textboxNumber.getText().contains("*")) {
 				String toReplace = textboxNumber.getText(); 
 				toReplace = toReplace.replaceAll("\\*", "\\%");
-				stringQuery.append(String.format(" number like '%s' ", toReplace));
+				stringQuery.append(String.format(" number like %s ", toReplace));
 			} else {
-				stringQuery.append(String.format(" number = '%s' ", textboxNumber.getText()));
+				stringQuery.append(String.format(" number = %s ", textboxNumber.getText()));
 			}
 		}
 		if (!"*".equals(textboxBalance.getText()) && !textboxBalance.getText().isEmpty()) {
