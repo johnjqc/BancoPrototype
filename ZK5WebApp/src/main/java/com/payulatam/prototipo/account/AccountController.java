@@ -124,7 +124,6 @@ public class AccountController extends GenericForwardComposer {
 			}
 			stringQuery.append(String.format(" balance = %s ", decimalboxBalance.getValue()));
 		}
-//		stringQuery.append(" ORDER BY number");
 		SQLQuery<Account> query = new SQLQuery<>(Account.class, stringQuery.toString());
 		
 		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);

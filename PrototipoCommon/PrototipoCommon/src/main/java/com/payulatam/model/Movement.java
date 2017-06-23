@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceId;
@@ -40,6 +41,8 @@ public class Movement implements Serializable {
 	private BigDecimal value;
 	
 	private String accountId;
+	
+	private boolean processed;
 
 	public Movement() {
 	}
@@ -62,9 +65,10 @@ public class Movement implements Serializable {
 		this.date = date;
 	}
 
+	@Transient
 	@SpaceRouting
 	public Integer getSpacerouting() {
-		return this.spacerouting;
+		return 1;
 	}
 
 	public void setSpacerouting(Integer spacerouting) {
@@ -94,5 +98,16 @@ public class Movement implements Serializable {
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
+
+	@Transient
+	public boolean isProcessed() {
+		return processed;
+	}
+
+	public void setProcessed(boolean processed) {
+		this.processed = processed;
+	}
+	
+	
 	
 }

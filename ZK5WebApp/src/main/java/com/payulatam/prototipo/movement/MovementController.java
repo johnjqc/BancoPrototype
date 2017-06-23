@@ -2,7 +2,6 @@ package com.payulatam.prototipo.movement;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.zkoss.zk.ui.Component;
@@ -56,8 +55,6 @@ public class MovementController extends GenericForwardComposer {
         	comboitem.setValue(accounts[i].getId());
         	comboitem.setParent(comboboxAccount);
 		}
-        
-        dateboxDate.setValue(new Date());
         
         Comboitem comboitemDefaultType = new Comboitem("*");
         comboitemDefaultType.setValue("*");
@@ -115,16 +112,12 @@ public class MovementController extends GenericForwardComposer {
 			}
 			stringQuery.append(String.format(" type = '%s' ", comboboxType.getText()));
 		}
-//		if (!"*".equals(textboxAddress.getText()) && !textboxAddress.getText().isEmpty()) {
-//			if (!stringQuery.toString().isEmpty()) {
-//				stringQuery.append(" and ");
-//			}
-//			if (textboxAddress.getText().contains("*")) {
-//				stringQuery.append(String.format(" address like '%s' ", textboxAddress.getText().replaceAll("\\*", "\\%")));
-//			} else {
-//				stringQuery.append(String.format(" address = '%s' ", textboxAddress.getText()));
-//			}
-//		}
+		if (dateboxDate.getValue() != null) {
+			if (!stringQuery.toString().isEmpty()) {
+				stringQuery.append(" and ");
+			}
+			stringQuery.append(String.format(" date = '%s' ", dateboxDate.getValue()));
+		}
 		
 		if (decimalboxValue.getValue() != null) {
 			if (!stringQuery.toString().isEmpty()) {
@@ -132,7 +125,7 @@ public class MovementController extends GenericForwardComposer {
 			}
 			stringQuery.append(String.format(" value = %s ", decimalboxValue.getValue()));
 		}
-//		stringQuery.append(" ORDER BY date");
+		stringQuery.append(" ORDER BY com.payulatam.model.Movement.date");
 		SQLQuery<Movement> query = new SQLQuery<>(Movement.class, stringQuery.toString());
 		
 		Movement[] result = GigaSpaceController.getGigaSpace().readMultiple(query);
