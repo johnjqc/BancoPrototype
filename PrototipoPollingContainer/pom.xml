@@ -33,6 +33,19 @@
 			<artifactId>javax.transaction-api</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>commons-pool</groupId>
+		    <artifactId>commons-pool</artifactId>
+		    <version>1.6</version>
+		</dependency>
+				
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>3.2.4.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>postgresql</groupId>
@@ -67,11 +80,13 @@
             <version>3.2.4.RELEASE</version>
             <scope>provided</scope>  
         </dependency>
+        
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>3.2.4.RELEASE</version>
-            <scope>test</scope>
-        </dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>3.2.4.RELEASE</version>
+		    <scope>test</scope>
+		</dependency>
+
 	</dependencies>
 </project>
