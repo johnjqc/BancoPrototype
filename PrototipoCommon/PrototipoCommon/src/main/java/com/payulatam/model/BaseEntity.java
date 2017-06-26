@@ -11,10 +11,11 @@ import com.gigaspaces.annotation.pojo.SpaceRouting;
 
 /**
  * The persistent class base database table.
+ * 
  * @author John
  */
 @MappedSuperclass
-public class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 722732249299686246L;
 	

@@ -28,8 +28,6 @@ public class Movement extends BaseEntity {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	private Long spacerouting;
-
 	@Enumerated(EnumType.STRING)
 	private String type;
 
