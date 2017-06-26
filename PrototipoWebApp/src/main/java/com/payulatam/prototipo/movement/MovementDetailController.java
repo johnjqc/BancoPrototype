@@ -70,7 +70,7 @@ public class MovementDetailController extends GenericForwardComposer {
 		actualMovement.setDate(dateboxDate.getValue());
 		actualMovement.setValue(decimalboxValue.getValue());
 		actualMovement.setProcessed(false);
-		actualMovement.setSpacerouting(1);
+		actualMovement.setSpacerouting(1L);
 		GigaSpaceController.getGigaSpace().write(actualMovement);
 		
 		Executions.sendRedirect("/pages/movement/movement.zul");

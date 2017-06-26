@@ -49,7 +49,7 @@ public class CustomerDetailController extends GenericForwardComposer {
 		actualCustomer.setName(textboxCustomer.getText());
 		actualCustomer.setAddress(textboxAddress.getText());
 		actualCustomer.setPhone(textboxPhone.getText());
-		actualCustomer.setSpacerouting(1);
+		actualCustomer.setSpacerouting(1L);
 		GigaSpaceController.getGigaSpace().write(actualCustomer);
 		Executions.sendRedirect("/pages/customer/customers.zul");
 	}

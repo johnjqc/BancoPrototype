@@ -74,7 +74,7 @@ public class AccountDetailController extends GenericForwardComposer {
 		actualAccount.setNumber(textboxNumber.getText());
 		actualAccount.setBalance(new BigDecimal(textboxBalance.getText()));
 		actualAccount.setCustomerId("" + comboboxCustomer.getSelectedItem().getValue());
-		actualAccount.setSpacerouting(1);
+		actualAccount.setSpacerouting(1L);
 		GigaSpaceController.getGigaSpace().write(actualAccount);
 		Executions.sendRedirect("/pages/account/account.zul");
 	}

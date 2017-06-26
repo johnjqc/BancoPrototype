@@ -1,39 +1,34 @@
 package com.payulatam.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import com.gigaspaces.annotation.pojo.SpaceClass;
-import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceRouting;
 
 
 /**
  * The persistent class for the movement database table.
- * 
+ * @author John
  */
 @Entity
 @Table(name="movement")
 @SpaceClass(persist=true)
-public class Movement implements Serializable {
+public class Movement extends BaseEntity {
+	
 	private static final long serialVersionUID = 1L;
-
-	private String id;
 
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	private Integer spacerouting;
+	private Long spacerouting;
 
 	@Enumerated(EnumType.STRING)
 	private String type;
@@ -47,16 +42,6 @@ public class Movement implements Serializable {
 	public Movement() {
 	}
 
-	@Id
-	@SpaceId(autoGenerate = true)
-	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public Date getDate() {
 		return this.date;
 	}
@@ -65,13 +50,14 @@ public class Movement implements Serializable {
 		this.date = date;
 	}
 
-	@Transient
+	@Override
 	@SpaceRouting
-	public Integer getSpacerouting() {
-		return 1;
+	public Long getSpacerouting() {
+		return this.spacerouting;
 	}
 
-	public void setSpacerouting(Integer spacerouting) {
+	@Override
+	public void setSpacerouting(Long spacerouting) {
 		this.spacerouting = spacerouting;
 	}
 
@@ -99,7 +85,6 @@ public class Movement implements Serializable {
 		this.accountId = accountId;
 	}
 
-	@Transient
 	public boolean isProcessed() {
 		return processed;
 	}
@@ -107,7 +92,5 @@ public class Movement implements Serializable {
 	public void setProcessed(boolean processed) {
 		this.processed = processed;
 	}
-	
-	
 	
 }
