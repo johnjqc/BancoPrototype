@@ -22,10 +22,10 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 
 import com.j_spaces.core.client.SQLQuery;
+import com.payulatam.common.GigaSpaceController;
 import com.payulatam.enums.MovementType;
 import com.payulatam.model.Account;
 import com.payulatam.model.Movement;
-import com.payulatam.prototipo.tools.GigaSpaceController;
 
 public class MovementController extends GenericForwardComposer {
 	

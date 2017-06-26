@@ -18,8 +18,8 @@ import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 
 import com.j_spaces.core.client.SQLQuery;
+import com.payulatam.common.GigaSpaceController;
 import com.payulatam.model.Customer;
-import com.payulatam.prototipo.tools.GigaSpaceController;
 
 public class CustomerController extends GenericForwardComposer {
 	

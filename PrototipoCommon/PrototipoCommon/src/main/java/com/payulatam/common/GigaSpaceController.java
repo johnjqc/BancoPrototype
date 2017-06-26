@@ -1,10 +1,8 @@
-package com.payulatam.prototipo.tools;
+package com.payulatam.common;
 
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.GigaSpaceConfigurer;
 import org.openspaces.core.space.UrlSpaceConfigurer;
-
-import com.payulatam.common.Constantes;
 
 /**
  * Get GigaSpace Connection object

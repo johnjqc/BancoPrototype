@@ -4,18 +4,19 @@ import java.math.BigDecimal;
 import java.util.logging.Logger;
 
 import org.openspaces.core.GigaSpace;
+import org.openspaces.core.context.GigaSpaceContext;
 import org.openspaces.events.EventDriven;
 import org.openspaces.events.EventTemplate;
-import org.openspaces.events.TransactionalEvent;
 import org.openspaces.events.adapter.SpaceDataEvent;
 import org.openspaces.events.polling.Polling;
 import org.openspaces.events.polling.ReceiveHandler;
 import org.openspaces.events.polling.receive.ReceiveOperationHandler;
 import org.openspaces.events.polling.receive.SingleTakeReceiveOperationHandler;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 
 import com.j_spaces.core.client.SQLQuery;
+import com.payulatam.common.GigaSpaceController;
+import com.payulatam.enums.MovementType;
+import com.payulatam.model.Account;
 import com.payulatam.model.Movement;
 
 
@@ -26,11 +27,12 @@ import com.payulatam.model.Movement;
  */
 @EventDriven
 @Polling
-@Service
-@TransactionalEvent(isolation = Isolation.READ_COMMITTED, timeout = 1000)
 public class Processor {
 
     Logger log= Logger.getLogger(this.getClass().getName());
+    
+    @GigaSpaceContext
+    GigaSpace gigaSpace;
     
     public Processor() {
 		System.out.println(this.getClass() + " constructed");
@@ -40,7 +42,6 @@ public class Processor {
     ReceiveOperationHandler receiveHandler() {
         SingleTakeReceiveOperationHandler receiveHandler = new SingleTakeReceiveOperationHandler();
         receiveHandler.setNonBlocking(true);
-        receiveHandler.setNonBlockingFactor(10);
         return receiveHandler;
     }
     
@@ -50,7 +51,6 @@ public class Processor {
     	return template;
     }
 
-
     /**
      * Process the given Data object and returning the processed Data.
      *
@@ -59,15 +59,26 @@ public class Processor {
      */
     @SpaceDataEvent
     public Movement processData(Movement data, GigaSpace space) {
-        // sleep to simulate some work
         data.setProcessed(true);
-//        data.setData("PROCESSED : " + data.getRawData());
         System.out.println("PollingContainer : " + data.getId());
-        log.info(" ------ PROCESSED : " + data);
         
-        if (data.getValue().equals(new BigDecimal(100))) {
-        	return null;
-        }
+        String id = data.getAccountId();
+		SQLQuery<Account> query = new SQLQuery<Account>(Account.class, "id = '" + id + "'");
+		Account account = GigaSpaceController.getGigaSpace().read(query);
+		if (MovementType.DEBIT.toString().equals(data.getType())) {
+			BigDecimal result = account.getBalance().add(data.getValue());
+			account.setBalance(result);
+			gigaSpace.write(account);
+		} else {
+			BigDecimal result = account.getBalance().subtract(data.getValue());
+			if (result.signum() >= 0) {
+				account.setBalance(result);
+				gigaSpace.write(account);
+			} else {
+				System.out.println("El movimiento no se registra por dejar la cuenta con Saldo negativo");
+				return null;
+			}
+		}
         
         return data;
     }

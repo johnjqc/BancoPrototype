@@ -11,10 +11,6 @@
        http://www.openspaces.org/schema/remoting http://www.openspaces.org/schema/10.0/remoting/openspaces-remoting.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd" >
 
-	<os-core:space id="prototipo" url="jini://*/*/prototipo?groups=gigaspaces-10.0.1-XAPPremium-ga" schema="persistent" 
-		 >
-	</os-core:space>
-	
 	<!--
         Enables the usage of @GigaSpaceContext annotation based injection.
     -->
@@ -23,19 +19,15 @@
     <!--
         Defines a distributed transaction manager.
     -->
-     <os-core:distributed-tx-manager id="transactionManager"/>
+    <os-core:distributed-tx-manager id="transactionManager"/>
 
+	<os-core:space id="prototipo" url="jini://*/*/prototipo?groups=gigaspaces-10.0.1-XAPPremium-ga" schema="persistent" />
 	
-	<os-core:space id="prototipo" url="jini://*/*/prototipo?groups=gigaspaces-10.0.1-XAPPremium-ga" schema="persistent" 
-		 >
-	</os-core:space>
 	<context:component-scan base-package="com.payultam.pollingcontainer"/>
 
 	<!-- Enable support for @Polling annotation -->
 	<os-events:annotation-support />
 	
-	
 	<os-core:giga-space id="gigaSpace" space="prototipo" tx-manager="transactionManager" />
-
 
 </beans>

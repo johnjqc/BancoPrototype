@@ -7,8 +7,8 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Textbox;
 
+import com.payulatam.common.GigaSpaceController;
 import com.payulatam.model.Customer;
-import com.payulatam.prototipo.tools.GigaSpaceController;
 
 public class CustomerDetailController extends GenericForwardComposer {
 
