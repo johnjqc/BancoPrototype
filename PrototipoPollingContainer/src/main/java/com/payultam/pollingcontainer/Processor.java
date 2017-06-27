@@ -14,7 +14,6 @@ import org.openspaces.events.polling.receive.ReceiveOperationHandler;
 import org.openspaces.events.polling.receive.SingleTakeReceiveOperationHandler;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.common.GigaSpaceController;
 import com.payulatam.enums.MovementType;
 import com.payulatam.model.Account;
 import com.payulatam.model.Movement;
@@ -24,6 +23,9 @@ import com.payulatam.model.Movement;
  * The processor simulates work done no un-processed Data object. The processData
  * accepts a Data object, simulate work by sleeping, and then sets the processed
  * flag to true and returns the processed Data.
+ * 
+ * @author John Quiroga
+ * 
  */
 @EventDriven
 @Polling
@@ -63,8 +65,8 @@ public class Processor {
         System.out.println("PollingContainer : " + data.getId());
         
         String id = data.getAccountId();
-		SQLQuery<Account> query = new SQLQuery<Account>(Account.class, "id = '" + id + "'");
-		Account account = GigaSpaceController.getGigaSpace().read(query);
+		SQLQuery<Account> query = new SQLQuery<Account>(Account.class, String.format("id = '%s'", id));
+		Account account = gigaSpace.read(query);
 		if (MovementType.DEBIT.toString().equals(data.getType())) {
 			BigDecimal result = account.getBalance().add(data.getValue());
 			account.setBalance(result);
