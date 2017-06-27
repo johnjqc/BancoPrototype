@@ -11,13 +11,20 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 
-import com.j_spaces.core.client.SQLQuery;
+import com.payulatam.gs.CustomerRepository;
 import com.payulatam.model.Customer;
 import com.payulatam.prototipo.BaseController;
 
+/**
+ * Customer controller for view
+ * @author John
+ *
+ */
 public class CustomerController extends BaseController<Customer> {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
+	
+	CustomerRepository<Customer> respository = new CustomerRepository<>(gigaSpace);
 	
 	private Textbox textboxCustomer;
 	private Textbox textboxAddress;
@@ -46,7 +53,7 @@ public class CustomerController extends BaseController<Customer> {
                 btnRemove.setImage("/images/icon-delete.png");
             	btnRemove.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
-            			gigaSpace.takeIfExistsById(Customer.class, prod.getId());
+            			respository.deleteById(prod.getId());
             			prodModel.remove(prod);
             		}
             	});
@@ -69,40 +76,7 @@ public class CustomerController extends BaseController<Customer> {
 	
 	@Override
 	public void onClick$buttonSearch() {
-		StringBuilder stringQuery = new StringBuilder();
-		if (!"*".equals(textboxCustomer.getText()) && !textboxCustomer.getText().isEmpty()) {
-			if (textboxCustomer.getText().contains("*")) {
-				String toReplace = textboxCustomer.getText(); 
-				toReplace = toReplace.replaceAll("\\*", "\\%");
-				stringQuery.append(String.format(" name like '%s' ", toReplace));
-			} else {
-				stringQuery.append(String.format(" name = '%s' ", textboxCustomer.getText()));
-			}
-		}
-		if (!"*".equals(textboxAddress.getText()) && !textboxAddress.getText().isEmpty()) {
-			if (!stringQuery.toString().isEmpty()) {
-				stringQuery.append(" and ");
-			}
-			if (textboxAddress.getText().contains("*")) {
-				stringQuery.append(String.format(" address like '%s' ", textboxAddress.getText().replaceAll("\\*", "\\%")));
-			} else {
-				stringQuery.append(String.format(" address = '%s' ", textboxAddress.getText()));
-			}
-		}
-		if (!"*".equals(textboxPhone.getText()) && !textboxPhone.getText().isEmpty()) {
-			if (!stringQuery.toString().isEmpty()) {
-				stringQuery.append(" and ");
-			}
-			if (textboxAddress.getText().contains("*")) {
-				stringQuery.append(String.format(" phone like '%s' ", textboxPhone.getText()).replaceAll("\\*", "\\%"));
-			} else {
-				stringQuery.append(String.format(" phone = '%s' ", textboxPhone.getText()));
-			}
-		}
-		stringQuery.append(" ORDER BY name");
-		SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, stringQuery.toString());
-		
-		Customer[] result = gigaSpace.readMultiple(query);
+		Customer[] result = respository.serach(textboxCustomer.getText(), textboxAddress.getText(), textboxPhone.getText());
 		setModel(result);
 	}
 	

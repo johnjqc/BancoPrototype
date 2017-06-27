@@ -11,6 +11,11 @@ import org.zkoss.zul.Textbox;
 import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.model.Customer;
 
+/**
+ * Customer Controller for view detail
+ * @author John
+ *
+ */
 public class CustomerDetailController extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 2409508627321213561L;
