@@ -5,7 +5,7 @@
 <?link rel="shortcut icon" type="image/x-icon" href="../images/Favicon.ico"?>
 
 <zk xmlns:h="xhtml">
-	<window border="none" apply="com.payulatam.prototipo.MainPage" width="60%" mode="overlapped" position="top, center">
+	<window border="none" width="60%" mode="overlapped" position="top, center">
 		<vlayout xmlns:n="native">
 			<include src="/WEB-INF/layout/toolbar.zul"/>
 			<div self="@{insert(content)}" />
