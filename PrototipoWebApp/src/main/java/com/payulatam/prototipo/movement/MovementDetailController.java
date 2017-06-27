@@ -3,6 +3,7 @@ package com.payulatam.prototipo.movement;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.openspaces.core.GigaSpace;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -13,7 +14,7 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.common.GigaSpaceController;
+import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.enums.MovementType;
 import com.payulatam.model.Account;
 import com.payulatam.model.Movement;
@@ -21,6 +22,8 @@ import com.payulatam.model.Movement;
 public class MovementDetailController extends GenericForwardComposer {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
+	
+	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
 	
 	private Movement actualMovement;
 	
@@ -36,7 +39,7 @@ public class MovementDetailController extends GenericForwardComposer {
         super.doAfterCompose(comp);
         
         SQLQuery<Account> query = new SQLQuery<>(Account.class, "");
-        Account[] accounts = GigaSpaceController.getGigaSpace().readMultiple(query);
+        Account[] accounts = gigaSpace.readMultiple(query);
         for (int i = 0; i < accounts.length; i++) {
         	Comboitem comboitem = new Comboitem(accounts[i].getNumber());
         	comboitem.setValue(accounts[i].getId());
@@ -71,7 +74,7 @@ public class MovementDetailController extends GenericForwardComposer {
 		actualMovement.setValue(decimalboxValue.getValue());
 		actualMovement.setProcessed(false);
 		actualMovement.setSpacerouting(1L);
-		GigaSpaceController.getGigaSpace().write(actualMovement);
+		gigaSpace.write(actualMovement);
 		
 		Executions.sendRedirect("/pages/movement/movement.zul");
 	}
