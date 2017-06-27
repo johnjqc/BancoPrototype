@@ -1,41 +1,29 @@
 package com.payulatam.prototipo.account;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.openspaces.core.GigaSpace;
-import org.openspaces.core.GigaSpaceConfigurer;
-import org.openspaces.core.space.UrlSpaceConfigurer;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Cell;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
-import org.zkoss.zul.Grid;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.common.Constantes;
-import com.payulatam.common.GigaSpaceController;
 import com.payulatam.model.Account;
 import com.payulatam.model.Customer;
+import com.payulatam.prototipo.BaseController;
+import com.payulatam.prototipo.ControllerHelper;
 
-public class AccountController extends GenericForwardComposer {
+public class AccountController extends BaseController<Account> {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
 	
-	private ListModelList prodModel;
-	
-	private Grid gridAccounts;
 	private Combobox comboboxCustomer;
 	private Textbox textboxNumber;
 	private Decimalbox decimalboxBalance;
@@ -44,14 +32,10 @@ public class AccountController extends GenericForwardComposer {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         
-        Comboitem comboitemDefault = new Comboitem();
-        comboitemDefault.setValue("*");
-        comboitemDefault.setLabel("*");
-        comboitemDefault.setParent(comboboxCustomer);
-        comboboxCustomer.setSelectedItem(comboitemDefault);
+        ControllerHelper.setItemDefault(comboboxCustomer);
     	
         SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, "ORDER BY name");
-        Customer[] customers = GigaSpaceController.getGigaSpace().readMultiple(query);
+        Customer[] customers = gigaSpace.readMultiple(query);
         for (int i = 0; i < customers.length; i++) {
         	Comboitem comboitem = new Comboitem();
         	comboitem.setValue(customers[i].getId());
@@ -61,11 +45,11 @@ public class AccountController extends GenericForwardComposer {
         
         textboxNumber.setText("*");
         
-        gridAccounts.setRowRenderer(new RowRenderer() {
+        gridResults.setRowRenderer(new RowRenderer() {
             public void render(Row row, Object data) throws Exception {
                 final Account prod = (Account)data;
                 
-                Customer customers = GigaSpaceController.getGigaSpace().readById(Customer.class, prod.getCustomerId());
+                Customer customers = gigaSpace.readById(Customer.class, prod.getCustomerId());
                 		
                 new Label(customers.getName()).setParent(row);
                 new Label(prod.getNumber()).setParent(row);
@@ -78,7 +62,7 @@ public class AccountController extends GenericForwardComposer {
                 btnRemove.setImage("/images/icon-delete.png");
             	btnRemove.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
-            			GigaSpaceController.getGigaSpace().takeIfExistsById(Account.class, prod.getId());
+            			gigaSpace.takeIfExistsById(Account.class, prod.getId());
             			prodModel.remove(prod);
             		}
             	});
@@ -98,6 +82,7 @@ public class AccountController extends GenericForwardComposer {
         });
     }
 	
+	@Override
 	public void onClick$buttonSearch() {
 		StringBuilder stringQuery = new StringBuilder();
 		
@@ -126,21 +111,11 @@ public class AccountController extends GenericForwardComposer {
 		}
 		SQLQuery<Account> query = new SQLQuery<>(Account.class, stringQuery.toString());
 		
-		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
-		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
 		Account[] result = gigaSpace.readMultiple(query);
 		setModel(result);
 	}
 	
-	private void setModel(Account[] Accounts) {
-		List<Account> accountResult = new ArrayList<>();
-		for (Account account : Accounts) {
-			accountResult.add(account);
-		}
-		prodModel = new ListModelList(accountResult);
-		gridAccounts.setModel(prodModel);
-	}
-	
+	@Override
 	public void onClick$btnNew() {
 		Executions.sendRedirect("/pages/account/accountDetail.zul");
 	}

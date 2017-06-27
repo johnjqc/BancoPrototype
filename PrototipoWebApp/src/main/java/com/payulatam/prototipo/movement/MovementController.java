@@ -1,39 +1,32 @@
 package com.payulatam.prototipo.movement;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Cell;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
-import org.zkoss.zul.Grid;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.common.GigaSpaceController;
 import com.payulatam.enums.MovementType;
 import com.payulatam.model.Account;
 import com.payulatam.model.Movement;
+import com.payulatam.prototipo.BaseController;
+import com.payulatam.prototipo.ControllerHelper;
 
-public class MovementController extends GenericForwardComposer {
+public class MovementController extends BaseController<Movement> {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
 	
-	private ListModelList prodModel;
-	
-	private Grid gridMovements;
 	private Combobox comboboxAccount;
 	private Combobox comboboxType;
 	private Datebox dateboxDate;
@@ -43,38 +36,25 @@ public class MovementController extends GenericForwardComposer {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         
-        Comboitem comboitemDefault = new Comboitem("*");
-        comboitemDefault.setValue("*");
-        comboitemDefault.setParent(comboboxAccount);
-        comboboxAccount.setSelectedItem(comboitemDefault);
+        ControllerHelper.setItemDefault(comboboxAccount);
         
         SQLQuery<Account> query = new SQLQuery<>(Account.class, "");
-        Account[] accounts = GigaSpaceController.getGigaSpace().readMultiple(query);
+        Account[] accounts = gigaSpace.readMultiple(query);
         for (int i = 0; i < accounts.length; i++) {
         	Comboitem comboitem = new Comboitem(accounts[i].getNumber());
         	comboitem.setValue(accounts[i].getId());
         	comboitem.setParent(comboboxAccount);
 		}
         
-        Comboitem comboitemDefaultType = new Comboitem("*");
-        comboitemDefaultType.setValue("*");
-        comboitemDefaultType.setParent(comboboxType);
-        comboboxType.setSelectedItem(comboitemDefaultType);
+        ControllerHelper.setItemDefault(comboboxType);
+        ControllerHelper.enumToComboItem(comboboxType, MovementType.class);
         
-        Comboitem comboitemDebit = new Comboitem(MovementType.DEBIT.toString());
-        comboitemDebit.setValue(MovementType.DEBIT.toString());
-        comboitemDebit.setParent(comboboxType);
-        
-        Comboitem comboitemCredit = new Comboitem(MovementType.CREDIT.toString());
-        comboitemCredit.setValue(MovementType.CREDIT.toString());
-        comboitemCredit.setParent(comboboxType);
-        
-        gridMovements.setRowRenderer(new RowRenderer() {
+        gridResults.setRowRenderer(new RowRenderer() {
             public void render(Row row, Object data) throws Exception {
                 final Movement prod = (Movement)data;
                 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                Account account = GigaSpaceController.getGigaSpace().readById(Account.class, prod.getAccountId());
+                Account account = gigaSpace.readById(Account.class, prod.getAccountId());
                 
                 new Label(account.getNumber()).setParent(row);
                 new Label(prod.getType().toString()).setParent(row);
@@ -88,7 +68,7 @@ public class MovementController extends GenericForwardComposer {
                 btnRemove.setImage("/images/icon-delete.png");
             	btnRemove.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
-            			GigaSpaceController.getGigaSpace().takeIfExistsById(Movement.class, prod.getId());
+            			gigaSpace.takeIfExistsById(Movement.class, prod.getId());
             			prodModel.remove(prod);
             		}
             	});
@@ -98,6 +78,7 @@ public class MovementController extends GenericForwardComposer {
         });
     }
 	
+	@Override
 	public void onClick$buttonSearch() {
 		StringBuilder stringQuery = new StringBuilder();
 		
@@ -128,19 +109,11 @@ public class MovementController extends GenericForwardComposer {
 		stringQuery.append(" ORDER BY com.payulatam.model.Movement.date");
 		SQLQuery<Movement> query = new SQLQuery<>(Movement.class, stringQuery.toString());
 		
-		Movement[] result = GigaSpaceController.getGigaSpace().readMultiple(query);
+		Movement[] result = gigaSpace.readMultiple(query);
 		setModel(result);
 	}
 	
-	private void setModel(Movement[] movements) {
-		List<Movement> movementResult = new ArrayList<>();
-		for (Movement movement : movements) {
-			movementResult.add(movement);
-		}
-		prodModel = new ListModelList(movementResult);
-		gridMovements.setModel(prodModel);
-	}
-	
+	@Override
 	public void onClick$btnNew() {
 		Executions.sendRedirect("/pages/movement/movementDetail.zul");
 	}

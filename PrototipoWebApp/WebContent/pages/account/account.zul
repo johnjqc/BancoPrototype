@@ -38,7 +38,7 @@
 		<toolbar apply="">
 			<toolbarbutton id="btnNew" label="${labels.account.new}" image="/images/icon-new.png" />
 		</toolbar>
-		<grid id="gridAccounts" mold="paging" pagingPosition="both" pageSize="10">
+		<grid id="gridResults" mold="paging" pagingPosition="both" pageSize="10">
 			<columns>
 				<column width="150px" >${labels.customer.id}</column>
 				<column  >${labels.account.number}</column>

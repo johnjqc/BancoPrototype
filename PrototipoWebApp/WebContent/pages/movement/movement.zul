@@ -43,7 +43,7 @@
 		<toolbar apply="">
 			<toolbarbutton id="btnNew" label="${labels.movement.new}" image="/images/icon-new.png" />
 		</toolbar>
-		<grid id="gridMovements" mold="paging" pagingPosition="both" pageSize="10">
+		<grid id="gridResults" mold="paging" pagingPosition="both" pageSize="10">
 			<columns>
 				<column width="150px" >${labels.account.number}</column>
 				<column  >${labels.movement.type}</column>

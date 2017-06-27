@@ -39,7 +39,7 @@
 		<toolbar apply="">
 			<toolbarbutton id="btnNew" label="${labels.customer.new}" image="/images/icon-new.png" />
 		</toolbar>
-		<grid id="gridCustomers" mold="paging" pagingPosition="both" pageSize="10">
+		<grid id="gridResults" mold="paging" pagingPosition="both" pageSize="10">
 			<columns>
 				<column >${labels.customer.customer}</column>
 				<column >${labels.customer.address}</column>
