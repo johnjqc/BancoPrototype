@@ -15,7 +15,7 @@ import com.gigaspaces.annotation.pojo.SpaceRouting;
  * @author John
  */
 @MappedSuperclass
-public abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable , Cloneable {
 	
 	private static final long serialVersionUID = 722732249299686246L;
 	
@@ -45,5 +45,13 @@ public abstract class BaseEntity implements Serializable {
 	public void setSpacerouting(Long spacerouting) {
 		this.spacerouting = spacerouting;
 	}
+	
+	public Object clone() {
+        try {
+			return super.clone();
+		} catch (CloneNotSupportedException e) {
+			return null;
+		}
+    }
 	
 }
