@@ -1,5 +1,7 @@
 package com.payultam.pollingcontainer;
 
+import java.math.BigDecimal;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gigaspaces.internal.utils.Assert;
+import com.payulatam.enums.MovementType;
+import com.payulatam.model.Account;
+import com.payulatam.model.Customer;
 import com.payulatam.model.Movement;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,8 +23,28 @@ public class ProcessorTest {
 	
 	@Autowired
     GigaSpace gigaSpace;
+	
+	@Before
+	public void prepareSpace() {
+		gigaSpace.clear(null);
+		
+		System.out.println("Before test");
+		Customer customer = new Customer();
+		customer.setName("John Quiroga");
+		customer.setPhone("3013684621");
+		customer.setAddress("trv 49C # 75-42 sur");
+		gigaSpace.write(customer);
+		
+		Account account = new Account();
+		account.setNumber("123456");
+		account.setBalance(new BigDecimal(100));
+		
+		customer = gigaSpace.read(customer);
+		account.setCustomerId(customer.getId());
+		gigaSpace.write(account);
+		
+	}
 
-    @Before
     @After
     public void clearSpace() {
         gigaSpace.clear(null);
@@ -27,16 +52,23 @@ public class ProcessorTest {
 
     @Test
     public void verifyProcessing() throws Exception {
-        // write the data to be processed to the Space
-    	Movement data = new Movement();
-        gigaSpace.write(data);
+    	Movement mov = new Movement();
+    	
+    	Account account = new Account();
+		account.setNumber("123456");
+		account = gigaSpace.read(account);
+		System.out.println("account: " + account);
+    	
+    	mov.setAccountId(account.getId());
+    	mov.setValue(new BigDecimal(20));
+    	mov.setType(MovementType.CREDIT.toString());
+    	mov.setProcessed(false);
+        gigaSpace.write(mov);
 
-        // create a template of the processed data (processed)
         Movement template = new Movement();
         template.setProcessed(true);
 
-        // wait for the result
-        Movement result = gigaSpace.take(template, 500);
+        Movement result = gigaSpace.read(template);
         
         Assert.notNull(result);
         Assert.isTrue(result.isProcessed());
