@@ -9,8 +9,8 @@ import org.openspaces.core.space.UrlSpaceConfigurer;
  * @author john.quiroga
  *
  */
-public class GigaSpaceController {
-	
+public class GigaSpaceHelper {
+
 	public static GigaSpace getGigaSpace() {
 		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
 		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();
