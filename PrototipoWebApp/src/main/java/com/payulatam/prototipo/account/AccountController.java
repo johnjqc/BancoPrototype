@@ -54,7 +54,6 @@ public class AccountController extends BaseController<Account> {
                 final Account prod = (Account)data;
                 
                 Customer customer = gigaSpace.readById(Customer.class, prod.getCustomerId());
-//                Customer customer = respositoryCustomer.findById(prod.getCustomerId());
                 		
                 new Label(customer.getName()).setParent(row);
                 new Label(prod.getNumber()).setParent(row);

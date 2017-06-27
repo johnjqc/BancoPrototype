@@ -47,7 +47,7 @@ public class MovementDetailController extends GenericForwardComposer {
         
         SQLQuery<Account> query = new SQLQuery<>(Account.class, "");
         Account[] accounts = gigaSpace.readMultiple(query);
-        for (int i = 0; i < accounts.length; i++) {
+        for (int i = 0;accounts!= null && i < accounts.length; i++) {
         	Comboitem comboitem = new Comboitem(accounts[i].getNumber());
         	comboitem.setValue(accounts[i].getId());
         	comboitem.setParent(comboboxAccount);

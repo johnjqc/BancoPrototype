@@ -11,6 +11,10 @@ import org.openspaces.core.space.UrlSpaceConfigurer;
  */
 public class GigaSpaceHelper {
 
+	/**
+	 * Connect to Space specific in Constantes.JINI
+	 * @return GigaSpace object
+	 */
 	public static GigaSpace getGigaSpace() {
 		UrlSpaceConfigurer spaceConfigurer = new UrlSpaceConfigurer(Constantes.JINI);
 		GigaSpace gigaSpace = new GigaSpaceConfigurer(spaceConfigurer).gigaSpace();

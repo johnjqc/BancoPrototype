@@ -45,9 +45,9 @@ public class ControllerHelper  {
 	 */
 	public static <J extends Enum<J>> void enumToComboItem(Combobox parent, Class<J> enumValues) {
 		Arrays.stream(enumValues.getEnumConstants()).forEach(item -> {
-        	Comboitem comboitemDebit = new Comboitem(item.toString());
-            comboitemDebit.setValue(item.toString());
-            comboitemDebit.setParent(parent);
+        	Comboitem comboItem = new Comboitem(item.toString());
+            comboItem.setValue(item.toString());
+            comboItem.setParent(parent);
         });
 	}
 }

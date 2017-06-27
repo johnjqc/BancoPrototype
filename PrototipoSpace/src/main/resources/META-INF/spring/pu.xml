@@ -59,40 +59,4 @@
 		external-data-source="hibernateSpaceDataSource" >
 	</os-core:space>
 	
-    <!--
-        Defines a distributed transaction manager.
-    -->
-<!--      <os-core:distributed-tx-manager id="transactionManager"/> -->
-
-    <!--
-        OpenSpaces simplified space API built on top of IJSpace/JavaSpace.
-    -->
-<!--     <os-core:giga-space id="gigaSpace" space="prototipo" tx-manager="transactionManager"/> -->
-
-    <!--
-        The data processor bean
-    -->
-<!--     <bean id="dataProcessor" class="com.payulatam.pu.Processor"/> -->
-   
-
-    <!--
-        A polling event container that perfoms (by default) polling take operations against
-        the space using the provided template (in our case, and the non processed data objects).
-        Once a match is found, the data processor bean event listener is triggered using the
-        annotation adapter.
-    -->
-<!--     <os-events:polling-container id="dataProcessorPollingEventContainer" giga-space="gigaSpace"> -->
-<!--         <os-events:tx-support tx-manager="transactionManager"/> -->
-<!--         <os-core:template> -->
-<!--             <bean class="com.mycompany.app.common.Data"> -->
-<!--                 <property name="processed" value="false"/> -->
-<!--             </bean> -->
-<!--         </os-core:template> -->
-<!--         <os-events:listener> -->
-<!--             <os-events:annotation-adapter> -->
-<!--                 <os-events:delegate ref="dataProcessor"/> -->
-<!--             </os-events:annotation-adapter> -->
-<!--         </os-events:listener> -->
-<!--     </os-events:polling-container> -->
-
 </beans>

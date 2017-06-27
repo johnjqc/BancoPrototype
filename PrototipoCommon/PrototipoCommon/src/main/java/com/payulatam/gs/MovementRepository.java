@@ -28,11 +28,11 @@ public class MovementRepository<J extends Movement> extends AbstractRepository<M
 	
 	public String generateStringQuery(String customerId, String typeMovement, Date date, BigDecimal balance) {
 		StringBuilder query = new StringBuilder();
-		if (customerId != null && !"*".equals(customerId)) {
+		if (customerId != null && !"*".equals(customerId) && !customerId.isEmpty()) {
 			query.append(String.format("accountId = '%s'", customerId));
 		}
 		
-		if (!"*".equals(typeMovement) && !typeMovement.isEmpty()) {
+		if (typeMovement != null && !"*".equals(typeMovement) && !typeMovement.isEmpty()) {
 			if (!query.toString().isEmpty()) {
 				query.append(" and ");
 			}

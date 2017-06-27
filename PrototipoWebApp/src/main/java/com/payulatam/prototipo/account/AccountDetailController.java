@@ -39,7 +39,7 @@ public class AccountDetailController extends GenericForwardComposer {
         
 		SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, "ORDER BY name");
         Customer[] customers = gigaSpace.readMultiple(query);
-        for (int i = 0; i < customers.length; i++) {
+        for (int i = 0;customers != null && i < customers.length; i++) {
         	Comboitem comboitem = new Comboitem();
         	comboitem.setValue(customers[i].getId());
         	comboitem.setLabel(customers[i].getName());

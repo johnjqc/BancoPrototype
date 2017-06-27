@@ -27,11 +27,11 @@ public class AccountRepository<J extends Account> extends AbstractRepository<Acc
 	
 	public String generateStringQuery(String customerId, String accountNumber, BigDecimal balance) {
 		StringBuilder query = new StringBuilder();
-		if (customerId != null && !"*".equals(customerId)) {
-			query.append("customerId = '" + customerId + "'");
+		if (customerId != null && !"*".equals(customerId) && !customerId.isEmpty()) {
+			query.append(String.format("customerId = '%s'", customerId));
 		}
 		
-		if (!"*".equals(accountNumber) && !accountNumber.isEmpty()) {
+		if (accountNumber != null && !"*".equals(accountNumber) && !accountNumber.isEmpty()) {
 			if (!query.toString().isEmpty()) {
 				query.append(" and ");
 			}

@@ -8,12 +8,12 @@
        xmlns:os-events="http://www.openspaces.org/schema/events"
        xmlns:os-remoting="http://www.openspaces.org/schema/remoting"
        xmlns:os-sla="http://www.openspaces.org/schema/sla"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
        http://www.openspaces.org/schema/core http://www.openspaces.org/schema/10.0/core/openspaces-core.xsd 
-       http://www.openspaces.org/schema/events http://www.openspaces.org/schema/10.0/events/openspaces-events.xsd
-       http://www.openspaces.org/schema/remoting http://www.openspaces.org/schema/remoting/openspaces-remoting.xsd
+       http://www.openspaces.org/schema/events http://www.openspaces.org/schema/10.0/events/openspaces-events.xsd 
+       http://www.openspaces.org/schema/remoting http://www.openspaces.org/schema/remoting/openspaces-remoting.xsd 
        http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/sla/openspaces-sla.xsd">
 
     <!--
@@ -22,10 +22,11 @@
 	-->
     <context:annotation-config/>
     
+    <!--
+        Enables the usage of @GigaSpaceContext annotation based injection.
+    -->
     <os-core:giga-space-context/>
 
-	<os-core:distributed-tx-manager id="transactionManager"/>
-	
     <!--
 		Instruct Spring to perform declarative transaction management
 		automatically on annotated classes.
@@ -35,7 +36,14 @@
     <os-core:space id="prototipo" url="jini://*/*/prototipo?groups=gigaspaces-10.0.1-XAPPremium-ga" 
     	lookup-timeout="3000" schema="persistent" />
 
+	<!--
+        Defines a distributed transaction manager.
+    -->
+	<os-core:distributed-tx-manager id="transactionManager"/>
 
+	<!--
+        OpenSpaces simplified space API built on top of IJSpace/JavaSpace.
+    -->
     <os-core:giga-space id="gigaSpace" space="prototipo" tx-manager="transactionManager"/>
 
 
