@@ -1,5 +1,6 @@
 package com.payulatam.prototipo.customer;
 
+import org.openspaces.core.GigaSpace;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -7,12 +8,14 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Textbox;
 
-import com.payulatam.common.GigaSpaceController;
+import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.model.Customer;
 
 public class CustomerDetailController extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 2409508627321213561L;
+	
+	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
 	
 	private Customer actualCustomer;
 	
@@ -35,7 +38,7 @@ public class CustomerDetailController extends GenericForwardComposer {
         } else {
         	buttonEdit.setVisible(true);
         	id = id.replaceAll("\\.", "^");
-        	actualCustomer = GigaSpaceController.getGigaSpace().readById(Customer.class, id);
+        	actualCustomer = gigaSpace.readById(Customer.class, id);
         	if (actualCustomer != null) {
         		textboxCustomer.setText(actualCustomer.getName());
         		textboxAddress.setText(actualCustomer.getAddress());
@@ -49,8 +52,7 @@ public class CustomerDetailController extends GenericForwardComposer {
 		actualCustomer.setName(textboxCustomer.getText());
 		actualCustomer.setAddress(textboxAddress.getText());
 		actualCustomer.setPhone(textboxPhone.getText());
-		actualCustomer.setSpacerouting(1L);
-		GigaSpaceController.getGigaSpace().write(actualCustomer);
+		gigaSpace.write(actualCustomer);
 		Executions.sendRedirect("/pages/customer/customers.zul");
 	}
 	
@@ -58,7 +60,7 @@ public class CustomerDetailController extends GenericForwardComposer {
 		actualCustomer.setName(textboxCustomer.getText());
 		actualCustomer.setAddress(textboxAddress.getText());
 		actualCustomer.setPhone(textboxPhone.getText());
-		GigaSpaceController.getGigaSpace().write(actualCustomer);
+		gigaSpace.write(actualCustomer);
 		Executions.sendRedirect("/pages/customer/customers.zul");
 	}
 	

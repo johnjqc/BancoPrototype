@@ -2,6 +2,7 @@ package com.payulatam.prototipo.account;
 
 import java.math.BigDecimal;
 
+import org.openspaces.core.GigaSpace;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -12,13 +13,15 @@ import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Textbox;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.common.GigaSpaceController;
+import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.model.Account;
 import com.payulatam.model.Customer;
 
 public class AccountDetailController extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 2409508627321213561L;
+	
+	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
 	
 	private Account actualAccount;
 	
@@ -34,7 +37,7 @@ public class AccountDetailController extends GenericForwardComposer {
         super.doAfterCompose(comp);
         
 		SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, "ORDER BY name");
-        Customer[] customers = GigaSpaceController.getGigaSpace().readMultiple(query);
+        Customer[] customers = gigaSpace.readMultiple(query);
         for (int i = 0; i < customers.length; i++) {
         	Comboitem comboitem = new Comboitem();
         	comboitem.setValue(customers[i].getId());
@@ -53,7 +56,7 @@ public class AccountDetailController extends GenericForwardComposer {
         } else {
         	buttonEdit.setVisible(true);
         	id = id.replaceAll("\\.", "^");
-        	actualAccount = GigaSpaceController.getGigaSpace().readById(Account.class, id);
+        	actualAccount = gigaSpace.readById(Account.class, id);
         	if (actualAccount != null) {
         		int indexItem = 0;
         		for (int i = 0; i < customers.length; i++) {
@@ -75,7 +78,7 @@ public class AccountDetailController extends GenericForwardComposer {
 		actualAccount.setBalance(new BigDecimal(textboxBalance.getText()));
 		actualAccount.setCustomerId("" + comboboxCustomer.getSelectedItem().getValue());
 		actualAccount.setSpacerouting(1L);
-		GigaSpaceController.getGigaSpace().write(actualAccount);
+		gigaSpace.write(actualAccount);
 		Executions.sendRedirect("/pages/account/account.zul");
 	}
 	
@@ -83,7 +86,7 @@ public class AccountDetailController extends GenericForwardComposer {
 		actualAccount.setNumber(textboxNumber.getText());
 		actualAccount.setBalance(new BigDecimal(textboxBalance.getText()));
 		actualAccount.setCustomerId("" + comboboxCustomer.getSelectedItem().getValue());
-		GigaSpaceController.getGigaSpace().write(actualAccount);
+		gigaSpace.write(actualAccount);
 		Executions.sendRedirect("/pages/account/account.zul");
 	}
 	
