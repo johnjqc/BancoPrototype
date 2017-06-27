@@ -2,7 +2,6 @@ package com.payulatam.gs;
 
 import org.openspaces.core.GigaSpace;
 
-import com.j_spaces.core.client.SQLQuery;
 import com.payulatam.model.Customer;
 
 /**
@@ -11,7 +10,7 @@ import com.payulatam.model.Customer;
  *
  * @param <BaseEntity>
  */
-public class CustomerRepository<BaseEntity> extends AbstractRepository<Customer> implements ICustomerRepository {
+public class CustomerRepository<J extends Customer> extends AbstractRepository<Customer> implements ICustomerRepository {
 
 	public CustomerRepository(GigaSpace gigaSpace) {
 		super.gigaSpace = gigaSpace;
@@ -19,42 +18,45 @@ public class CustomerRepository<BaseEntity> extends AbstractRepository<Customer>
 
 	@Override
 	public Customer[] serach(String name, String address, String phone) {
-		StringBuilder stringQuery = new StringBuilder();
-		if (!"*".equals(name) && !name.isEmpty()) {
+		String queryString = generateStringQuery(name, address, phone);
+		Customer[] result = findByCriteria(queryString);
+		return result;
+	}
+	
+	public String generateStringQuery(String name, String address, String phone) {
+		StringBuilder query = new StringBuilder();
+		if (name != null && !"*".equals(name) && !name.isEmpty()) {
 			if (name.contains("*")) {
 				String toReplace = name; 
 				toReplace = toReplace.replaceAll("\\*", "\\%");
-				stringQuery.append(String.format(" name like '%s' ", toReplace));
+				query.append(String.format(" name like '%s' ", toReplace));
 			} else {
-				stringQuery.append(String.format(" name = '%s' ", name));
+				query.append(String.format(" name = '%s' ", name));
 			}
 		}
-		if (!"*".equals(address) && !address.isEmpty()) {
-			if (!stringQuery.toString().isEmpty()) {
-				stringQuery.append(" and ");
+		if (address != null && !"*".equals(address) && !address.isEmpty()) {
+			if (!query.toString().isEmpty()) {
+				query.append(" and ");
 			}
 			if (address.contains("*")) {
-				stringQuery.append(String.format(" address like '%s' ", address.replaceAll("\\*", "\\%")));
+				query.append(String.format(" address like '%s' ", address.replaceAll("\\*", "\\%")));
 			} else {
-				stringQuery.append(String.format(" address = '%s' ", address));
+				query.append(String.format(" address = '%s' ", address));
 			}
 		}
-		if (!"*".equals(phone) && !phone.isEmpty()) {
-			if (!stringQuery.toString().isEmpty()) {
-				stringQuery.append(" and ");
+		if (phone != null && !"*".equals(phone) && !phone.isEmpty()) {
+			if (!query.toString().isEmpty()) {
+				query.append(" and ");
 			}
-			if (address.contains("*")) {
-				stringQuery.append(String.format(" phone like '%s' ", phone).replaceAll("\\*", "\\%"));
+			if (phone.contains("*")) {
+				query.append(String.format(" phone like '%s' ", phone).replaceAll("\\*", "\\%"));
 			} else {
-				stringQuery.append(String.format(" phone = '%s' ", phone));
+				query.append(String.format(" phone = '%s' ", phone));
 			}
 		}
-		stringQuery.append(" ORDER BY name");
-		SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, stringQuery.toString());
+		query.append(" ORDER BY name");
 		
-		Customer[] result = gigaSpace.readMultiple(query);
-		
-		return result;
+		return query.toString();
 	}
 	
 }

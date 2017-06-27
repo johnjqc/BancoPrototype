@@ -14,7 +14,9 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 
-import com.j_spaces.core.client.SQLQuery;
+import com.payulatam.common.Constantes;
+import com.payulatam.gs.AccountRepository;
+import com.payulatam.gs.CustomerRepository;
 import com.payulatam.model.Account;
 import com.payulatam.model.Customer;
 import com.payulatam.prototipo.BaseController;
@@ -23,6 +25,9 @@ import com.payulatam.prototipo.ControllerHelper;
 public class AccountController extends BaseController<Account> {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
+	
+	AccountRepository<Account> respository = new AccountRepository<>(gigaSpace);
+	CustomerRepository<Customer> respositoryCustomer = new CustomerRepository<>(gigaSpace);
 	
 	private Combobox comboboxCustomer;
 	private Textbox textboxNumber;
@@ -34,8 +39,7 @@ public class AccountController extends BaseController<Account> {
         
         ControllerHelper.setItemDefault(comboboxCustomer);
     	
-        SQLQuery<Customer> query = new SQLQuery<Customer>(Customer.class, "ORDER BY name");
-        Customer[] customers = gigaSpace.readMultiple(query);
+        Customer[] customers = respositoryCustomer.findByCriteria("ORDER BY name");
         for (int i = 0; i < customers.length; i++) {
         	Comboitem comboitem = new Comboitem();
         	comboitem.setValue(customers[i].getId());
@@ -49,9 +53,10 @@ public class AccountController extends BaseController<Account> {
             public void render(Row row, Object data) throws Exception {
                 final Account prod = (Account)data;
                 
-                Customer customers = gigaSpace.readById(Customer.class, prod.getCustomerId());
+                Customer customer = gigaSpace.readById(Customer.class, prod.getCustomerId());
+//                Customer customer = respositoryCustomer.findById(prod.getCustomerId());
                 		
-                new Label(customers.getName()).setParent(row);
+                new Label(customer.getName()).setParent(row);
                 new Label(prod.getNumber()).setParent(row);
                 new Label(prod.getBalance().toString()).setParent(row);
                 
@@ -59,22 +64,22 @@ public class AccountController extends BaseController<Account> {
                 buttons.setParent(row);
                 
                 Button btnRemove = new Button();
-                btnRemove.setImage("/images/icon-delete.png");
+                btnRemove.setImage(Constantes.ICON_DELETE);
             	btnRemove.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
-            			gigaSpace.takeIfExistsById(Account.class, prod.getId());
+            			respository.deleteById(prod.getId());
             			prodModel.remove(prod);
             		}
             	});
             	btnRemove.setParent(buttons);
             	
             	Button btnEdit = new Button();
-                btnEdit.setImage("/images/icon-edit.png");
+                btnEdit.setImage(Constantes.ICON_EDIT);
             	btnEdit.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
             			String id = prod.getId();
             			id = id.replaceAll("\\^", ".");
-            			Executions.sendRedirect("/pages/account/accountDetail.zul?id=" + id);
+            			Executions.sendRedirect(Constantes.PATH_ACCOUNT_DETAIL + "?id=" + id);
             		}
             	});
             	btnEdit.setParent(buttons);
@@ -84,40 +89,15 @@ public class AccountController extends BaseController<Account> {
 	
 	@Override
 	public void onClick$buttonSearch() {
-		StringBuilder stringQuery = new StringBuilder();
-		
 		Comboitem itemCustomer = comboboxCustomer.getSelectedItem();
-		if (itemCustomer != null && !"*".equals(itemCustomer.getValue())) {
-			stringQuery.append("customerId = '" + itemCustomer.getValue() + "'");
-		}
-		
-		if (!"*".equals(textboxNumber.getText()) && !textboxNumber.getText().isEmpty()) {
-			if (!stringQuery.toString().isEmpty()) {
-				stringQuery.append(" and ");
-			}
-			if (textboxNumber.getText().contains("*")) {
-				String toReplace = textboxNumber.getText(); 
-				toReplace = toReplace.replaceAll("\\*", "\\%");
-				stringQuery.append(String.format(" number like %s ", toReplace));
-			} else {
-				stringQuery.append(String.format(" number = %s ", textboxNumber.getText()));
-			}
-		}
-		if (decimalboxBalance.getValue() != null) {
-			if (!stringQuery.toString().isEmpty()) {
-				stringQuery.append(" and ");
-			}
-			stringQuery.append(String.format(" balance = %s ", decimalboxBalance.getValue()));
-		}
-		SQLQuery<Account> query = new SQLQuery<>(Account.class, stringQuery.toString());
-		
-		Account[] result = gigaSpace.readMultiple(query);
+		Account[] result = respository.serach(String.valueOf(itemCustomer.getValue()), 
+				textboxNumber.getText(), decimalboxBalance.getValue());
 		setModel(result);
 	}
 	
 	@Override
 	public void onClick$btnNew() {
-		Executions.sendRedirect("/pages/account/accountDetail.zul");
+		Executions.sendRedirect(Constantes.PATH_ACCOUNT_DETAIL);
 	}
 	
 }

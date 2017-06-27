@@ -1,4 +1,4 @@
-package com.payulatam.common;
+package com.payulatam.prototipo;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import com.payulatam.model.Movement;
 
-public class UtilsTest {
+public class ControllerHelperTest {
 
 	@Test
 	public void testArrayToList() throws Exception {
@@ -19,9 +19,9 @@ public class UtilsTest {
 			arr[i] = m1;
 		}
 		 
-		List<Movement>  lst = Utils.arrayToList(arr);
+		List<Movement>  lst = ControllerHelper.arrayToList(arr);
 		List<String> ids = lst.stream().map(Movement::getId).collect(Collectors.toList());
 		Assert.assertTrue("[1, 2, 3]".equals(ids.toString()));
 	}
-
+	
 }

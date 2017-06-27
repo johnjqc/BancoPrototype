@@ -13,6 +13,7 @@ import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Textbox;
 
 import com.j_spaces.core.client.SQLQuery;
+import com.payulatam.common.Constantes;
 import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.model.Account;
 import com.payulatam.model.Customer;
@@ -79,7 +80,7 @@ public class AccountDetailController extends GenericForwardComposer {
 		actualAccount.setCustomerId("" + comboboxCustomer.getSelectedItem().getValue());
 		actualAccount.setSpacerouting(1L);
 		gigaSpace.write(actualAccount);
-		Executions.sendRedirect("/pages/account/account.zul");
+		Executions.sendRedirect(Constantes.PATH_ACCOUNT);
 	}
 	
 	public void onClick$buttonEdit() {
@@ -87,7 +88,7 @@ public class AccountDetailController extends GenericForwardComposer {
 		actualAccount.setBalance(new BigDecimal(textboxBalance.getText()));
 		actualAccount.setCustomerId("" + comboboxCustomer.getSelectedItem().getValue());
 		gigaSpace.write(actualAccount);
-		Executions.sendRedirect("/pages/account/account.zul");
+		Executions.sendRedirect(Constantes.PATH_ACCOUNT);
 	}
 	
 }

@@ -12,6 +12,7 @@ public interface IGenericRepository <J extends BaseEntity> {
 
 	public J findById( final String id );
 	public J[] findAll();
+	public J[] findByCriteria( final String criteria);
     public void save( final J entity );
     public void deleteById( final String entityId );
 

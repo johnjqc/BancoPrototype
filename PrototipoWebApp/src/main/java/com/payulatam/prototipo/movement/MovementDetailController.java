@@ -14,11 +14,18 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 
 import com.j_spaces.core.client.SQLQuery;
+import com.payulatam.common.Constantes;
 import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.enums.MovementType;
 import com.payulatam.model.Account;
 import com.payulatam.model.Movement;
+import com.payulatam.prototipo.ControllerHelper;
 
+/**
+ * Controller Detal for Movements
+ * @author john.quiroga
+ *
+ */
 public class MovementDetailController extends GenericForwardComposer {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
@@ -50,14 +57,7 @@ public class MovementDetailController extends GenericForwardComposer {
         	comboboxAccount.setSelectedIndex(0);
         }
         
-        Comboitem comboitemDebit = new Comboitem(MovementType.DEBIT.toString());
-        comboitemDebit.setValue(MovementType.DEBIT.toString());
-        comboitemDebit.setParent(comboboxType);
-        
-        Comboitem comboitemCredit = new Comboitem(MovementType.CREDIT.toString());
-        comboitemCredit.setValue(MovementType.CREDIT.toString());
-        comboitemCredit.setParent(comboboxType);
-        
+        ControllerHelper.enumToComboItem(comboboxType, MovementType.class);
         comboboxType.setSelectedIndex(0);
         
         dateboxDate.setValue(new Date());
@@ -76,7 +76,7 @@ public class MovementDetailController extends GenericForwardComposer {
 		actualMovement.setSpacerouting(1L);
 		gigaSpace.write(actualMovement);
 		
-		Executions.sendRedirect("/pages/movement/movement.zul");
+		Executions.sendRedirect(Constantes.PATH_MOVEMENT);
 	}
 	
 }

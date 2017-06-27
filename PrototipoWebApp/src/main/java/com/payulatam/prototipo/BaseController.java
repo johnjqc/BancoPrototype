@@ -6,7 +6,6 @@ import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModelList;
 
 import com.payulatam.common.GigaSpaceHelper;
-import com.payulatam.common.Utils;
 import com.payulatam.model.BaseEntity;
 
 /**
@@ -24,13 +23,23 @@ public abstract class BaseController<J extends BaseEntity> extends GenericForwar
 	protected ListModelList prodModel;
 	protected J actualObject;
 	
+	/**
+	 * Set Model of results grid for Controller
+	 * @param array
+	 */
 	public void setModel(J[] array) {
-		prodModel = new ListModelList(Utils.arrayToList(array));
+		prodModel = new ListModelList(ControllerHelper.arrayToList(array));
 		gridResults.setModel(prodModel);
 	}
 	
+	/**
+	 * Action of Button Search for Controller
+	 */
 	public abstract void onClick$buttonSearch();
 	
+	/**
+	 * Action of Button New for Controller
+	 */
 	public abstract void onClick$btnNew();
 	
 }

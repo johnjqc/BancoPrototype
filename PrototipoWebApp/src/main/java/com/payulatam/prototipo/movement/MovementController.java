@@ -16,16 +16,26 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 
-import com.j_spaces.core.client.SQLQuery;
+import com.payulatam.common.Constantes;
 import com.payulatam.enums.MovementType;
+import com.payulatam.gs.AccountRepository;
+import com.payulatam.gs.MovementRepository;
 import com.payulatam.model.Account;
 import com.payulatam.model.Movement;
 import com.payulatam.prototipo.BaseController;
 import com.payulatam.prototipo.ControllerHelper;
 
+/**
+ * Controller for Movement
+ * @author john.quiroga
+ *
+ */
 public class MovementController extends BaseController<Movement> {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
+	
+	MovementRepository<Movement> respository = new MovementRepository<>(gigaSpace);
+	AccountRepository<Account> respositoryAccount = new AccountRepository<>(gigaSpace);
 	
 	private Combobox comboboxAccount;
 	private Combobox comboboxType;
@@ -38,8 +48,7 @@ public class MovementController extends BaseController<Movement> {
         
         ControllerHelper.setItemDefault(comboboxAccount);
         
-        SQLQuery<Account> query = new SQLQuery<>(Account.class, "");
-        Account[] accounts = gigaSpace.readMultiple(query);
+        Account[] accounts = respositoryAccount.findAll();
         for (int i = 0; i < accounts.length; i++) {
         	Comboitem comboitem = new Comboitem(accounts[i].getNumber());
         	comboitem.setValue(accounts[i].getId());
@@ -65,57 +74,29 @@ public class MovementController extends BaseController<Movement> {
                 buttons.setParent(row);
                 
                 Button btnRemove = new Button();
-                btnRemove.setImage("/images/icon-delete.png");
+                btnRemove.setImage(Constantes.ICON_DELETE);
             	btnRemove.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
-            			gigaSpace.takeIfExistsById(Movement.class, prod.getId());
+            			respository.deleteById(prod.getId());
             			prodModel.remove(prod);
             		}
             	});
             	btnRemove.setParent(buttons);
-            	
             }
         });
     }
 	
 	@Override
 	public void onClick$buttonSearch() {
-		StringBuilder stringQuery = new StringBuilder();
-		
 		Comboitem itemAccount = comboboxAccount.getSelectedItem();
-		if (itemAccount != null && !"*".equals(itemAccount.getValue())) {
-			stringQuery.append("accountId = '" + itemAccount.getValue() + "'");
-		}
-		
-		if (!"*".equals(comboboxType.getText()) && !comboboxType.getText().isEmpty()) {
-			if (!stringQuery.toString().isEmpty()) {
-				stringQuery.append(" and ");
-			}
-			stringQuery.append(String.format(" type = '%s' ", comboboxType.getText()));
-		}
-		if (dateboxDate.getValue() != null) {
-			if (!stringQuery.toString().isEmpty()) {
-				stringQuery.append(" and ");
-			}
-			stringQuery.append(String.format(" date = '%s' ", dateboxDate.getValue()));
-		}
-		
-		if (decimalboxValue.getValue() != null) {
-			if (!stringQuery.toString().isEmpty()) {
-				stringQuery.append(" and ");
-			}
-			stringQuery.append(String.format(" value = %s ", decimalboxValue.getValue()));
-		}
-		stringQuery.append(" ORDER BY com.payulatam.model.Movement.date");
-		SQLQuery<Movement> query = new SQLQuery<>(Movement.class, stringQuery.toString());
-		
-		Movement[] result = gigaSpace.readMultiple(query);
+		Movement[] result = respository.serach(String.valueOf(itemAccount.getValue()), comboboxType.getText(),
+				dateboxDate.getValue(), decimalboxValue.getValue());
 		setModel(result);
 	}
 	
 	@Override
 	public void onClick$btnNew() {
-		Executions.sendRedirect("/pages/movement/movementDetail.zul");
+		Executions.sendRedirect(Constantes.PATH_MOVEMENT_DETAIL);
 	}
 	
 }

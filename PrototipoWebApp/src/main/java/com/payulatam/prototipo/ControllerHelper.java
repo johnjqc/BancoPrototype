@@ -1,9 +1,14 @@
 package com.payulatam.prototipo;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
+
+import com.payulatam.model.BaseEntity;
 
 /**
  * Utilities for controllers
@@ -11,6 +16,16 @@ import org.zkoss.zul.Comboitem;
  *
  */
 public class ControllerHelper  {
+	
+	/**
+	 * Convert array Object to List<Object>
+	 * @param array Data to process
+	 * @return List<Object>
+	 */
+	@SuppressWarnings("unchecked")
+	public static <J extends BaseEntity> List<J> arrayToList(J[] array) {
+		return (List<J>)(Object)Stream.of(array).map(J::clone).collect(Collectors.toList());
+	}
 
 	/**
 	 * Set default Comboitem with * on Combobox object

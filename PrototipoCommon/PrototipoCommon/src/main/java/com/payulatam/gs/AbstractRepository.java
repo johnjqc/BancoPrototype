@@ -33,6 +33,11 @@ public abstract class AbstractRepository<J extends BaseEntity> implements IGener
         return gigaSpace.readMultiple(query);
 	}
 	
+	public J[] findByCriteria( final String criteria) {
+		SQLQuery<J> query = new SQLQuery<>(entityClass, criteria);
+        return gigaSpace.readMultiple(query);
+	}
+	
     public void save( final J entity ) {
     	gigaSpace.write(entity);
     }

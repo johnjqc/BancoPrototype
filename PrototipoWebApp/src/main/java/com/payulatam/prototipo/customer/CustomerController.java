@@ -11,13 +11,14 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 
+import com.payulatam.common.Constantes;
 import com.payulatam.gs.CustomerRepository;
 import com.payulatam.model.Customer;
 import com.payulatam.prototipo.BaseController;
 
 /**
  * Customer controller for view
- * @author John
+ * @author John Quiroga
  *
  */
 public class CustomerController extends BaseController<Customer> {
@@ -50,7 +51,7 @@ public class CustomerController extends BaseController<Customer> {
                 buttons.setParent(row);
                 
                 Button btnRemove = new Button();
-                btnRemove.setImage("/images/icon-delete.png");
+                btnRemove.setImage(Constantes.ICON_DELETE);
             	btnRemove.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
             			respository.deleteById(prod.getId());
@@ -60,12 +61,12 @@ public class CustomerController extends BaseController<Customer> {
             	btnRemove.setParent(buttons);
             	
             	Button btnEdit = new Button();
-                btnEdit.setImage("/images/icon-edit.png");
+                btnEdit.setImage(Constantes.ICON_EDIT);
             	btnEdit.addEventListener("onClick", new EventListener() {
             		public void onEvent(Event event) {
             			String id = prod.getId();
             			id = id.replaceAll("\\^", ".");
-            			Executions.sendRedirect("/pages/customer/customerDetail.zul?id=" + id);
+            			Executions.sendRedirect(Constantes.PATH_CUSTOMER_DETAIL + "?id=" + id);
             		}
             	});
             	btnEdit.setParent(buttons);
@@ -82,7 +83,7 @@ public class CustomerController extends BaseController<Customer> {
 	
 	@Override
 	public void onClick$btnNew() {
-		Executions.sendRedirect("/pages/customer/customerDetail.zul");
+		Executions.sendRedirect(Constantes.PATH_CUSTOMER_DETAIL);
 	}
 	
 }

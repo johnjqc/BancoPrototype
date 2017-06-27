@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Textbox;
 
+import com.payulatam.common.Constantes;
 import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.model.Customer;
 
@@ -58,7 +59,7 @@ public class CustomerDetailController extends GenericForwardComposer {
 		actualCustomer.setAddress(textboxAddress.getText());
 		actualCustomer.setPhone(textboxPhone.getText());
 		gigaSpace.write(actualCustomer);
-		Executions.sendRedirect("/pages/customer/customers.zul");
+		Executions.sendRedirect(Constantes.PATH_CUSTOMER);
 	}
 	
 	public void onClick$buttonEdit() {
@@ -66,7 +67,7 @@ public class CustomerDetailController extends GenericForwardComposer {
 		actualCustomer.setAddress(textboxAddress.getText());
 		actualCustomer.setPhone(textboxPhone.getText());
 		gigaSpace.write(actualCustomer);
-		Executions.sendRedirect("/pages/customer/customers.zul");
+		Executions.sendRedirect(Constantes.PATH_CUSTOMER);
 	}
 	
 }
