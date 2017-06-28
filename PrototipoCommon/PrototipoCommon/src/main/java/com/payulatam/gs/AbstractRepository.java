@@ -24,8 +24,7 @@ public abstract class AbstractRepository<J extends BaseEntity> implements IGener
     }
 	
 	public J findById( final String id ) {
-		SQLQuery<J> query = new SQLQuery<>(entityClass, String.format("id = '%s' ", id));
-        return gigaSpace.readById(entityClass, query);
+        return gigaSpace.readById(entityClass, id);
     }
 	
 	public J[] findAll() {

@@ -48,7 +48,7 @@ public class MovementDetailController extends GenericForwardComposer {
         SQLQuery<Account> query = new SQLQuery<>(Account.class, "");
         Account[] accounts = gigaSpace.readMultiple(query);
         for (int i = 0;accounts!= null && i < accounts.length; i++) {
-        	Comboitem comboitem = new Comboitem(accounts[i].getNumber());
+        	Comboitem comboitem = new Comboitem(accounts[i].getNumberAccount());
         	comboitem.setValue(accounts[i].getId());
         	comboitem.setParent(comboboxAccount);
 		}
@@ -70,7 +70,7 @@ public class MovementDetailController extends GenericForwardComposer {
 		actualMovement = new Movement();
 		actualMovement.setAccountId("" + comboboxAccount.getSelectedItem().getValue());
 		actualMovement.setType("" + comboboxType.getSelectedItem().getValue());
-		actualMovement.setDate(dateboxDate.getValue());
+		actualMovement.setMovementDate(dateboxDate.getValue());
 		actualMovement.setValue(decimalboxValue.getValue());
 		actualMovement.setProcessed(false);
 		actualMovement.setSpacerouting(1L);

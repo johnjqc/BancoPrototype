@@ -6,7 +6,47 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layout/template.zul" ?>
 
 <zk xmlns:h="xhtml" xmlns:w="client" xmlns:n="native">
-	<vlayout self="@{define(content)}" xmlns:n="native" >
-		Customers
+	<vlayout self="@{define(content)}" xmlns:n="native" 
+		apply="com.payulatam.prototipo.report.ReportController">
+		<grid>
+			<columns>
+				<column  width="100px" />
+				<column />
+				<column width="100px" />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<label value="${labels.customer.id}" />
+					<cell colspan="3" style="text-align:center">
+                        <combobox id="comboboxCustomer" width="100%" tabindex="1" />
+                    </cell>
+				</row>
+				<row>
+					<label value="${labels.account.number}" />
+					<datebox id="dateboxDateInitial" width="100%" tabindex="1" />
+					<label value="${labels.account.number}" />
+					<datebox id="dateboxDateFinal" width="100%" tabindex="1" />
+				</row>
+				<row>
+                    <cell colspan="4" style="text-align:center">
+                        <vlayout>
+                            <button id="buttonSearch" label="${labels.app.search}" width="100px" height="30px" />
+                        </vlayout>
+                    </cell>
+                </row>
+			</rows>
+		</grid>
+		<toolbar apply="">
+			<toolbarbutton id="btnNew" label="${labels.account.new}" image="/images/icon-new.png" />
+		</toolbar>
+		<grid id="gridResults" mold="paging" pagingPosition="both" pageSize="10">
+			<columns>
+				<column width="150px" >${labels.customer.id}</column>
+				<column  >${labels.account.number}</column>
+				<column  >${labels.account.balance}</column>
+				<column  />
+			</columns>
+		</grid>
 	</vlayout>
 </zk>

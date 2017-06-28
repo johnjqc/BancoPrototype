@@ -2,6 +2,7 @@ package com.payulatam.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -23,7 +24,8 @@ public class Account extends BaseEntity {
 
 	private BigDecimal balance;
 
-	private String number;
+	@Column(name="numberaccount")
+	private String numberAccount;
 
 	public Account() {
 	}
@@ -44,12 +46,12 @@ public class Account extends BaseEntity {
 		this.balance = balance;
 	}
 
-	public String getNumber() {
-		return this.number;
+	public String getNumberAccount() {
+		return this.numberAccount;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setNumberAccount(String number) {
+		this.numberAccount = number;
 	}
 
 }

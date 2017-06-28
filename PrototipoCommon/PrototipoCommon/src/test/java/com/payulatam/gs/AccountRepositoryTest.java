@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openspaces.core.GigaSpace;
@@ -14,12 +15,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.payulatam.model.Account;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(locations = { "classpath:/Test-context.xml" })
 public class AccountRepositoryTest {
 	
 	@Autowired
     GigaSpace gigaSpace;
-	private AccountRepository<Account> repo = new AccountRepository<>(gigaSpace);
+	private AccountRepository<Account> repo;
+	
+	@Before
+	public void before() throws Exception {
+		repo = new AccountRepository<>(gigaSpace);
+	}
 	
     @After
     public void clearSpace() {
@@ -27,143 +33,143 @@ public class AccountRepositoryTest {
     }
     
 	@Test
-	public void generateStringQueryWhithDefaultTest() throws Exception {
+	public void testGenerateStringQueryWhithDefault() throws Exception {
 		String customerId = "*";
 		String accountNumber = "*";
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(query.isEmpty());
+		Assert.assertTrue(" ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryWhithEmptyTest() throws Exception {
+	public void testGenerateStringQueryWhithEmpty() throws Exception {
 		String customerId = "";
 		String accountNumber = "";
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(query.isEmpty());
+		Assert.assertTrue(" ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryWhithAllEqualTest() throws Exception {
+	public void testGenerateStringQueryWhithAllEqual() throws Exception {
 		String customerId = "customerId";
 		String accountNumber = "MyaccountNumber";
 		BigDecimal balance = new BigDecimal(1);
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue("customerId = 'customerId' and  number = 'MyaccountNumber'  and  balance = 1 ".equals(query));
+		Assert.assertTrue("customerId = 'customerId' and  numberaccount = 'MyaccountNumber'  and  balance = 1  ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryWhithAllLikeTest() throws Exception {
+	public void testGenerateStringQueryWhithAllLike() throws Exception {
 		String customerId = "customerId*";
 		String accountNumber = "MyaccountNumber*";
 		BigDecimal balance = new BigDecimal(1);
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue("customerId = 'customerId*' and  number like 'MyaccountNumber%'  and  balance = 1 ".equals(query));
+		Assert.assertTrue("customerId = 'customerId*' and  numberaccount like 'MyaccountNumber%'  and  balance = 1  ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryWhithNullTest() throws Exception {
+	public void testGenerateStringQueryWhithNull() throws Exception {
 		String customerId = null;
 		String accountNumber = null;
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(query.isEmpty());
+		Assert.assertTrue(" ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryByCustomerIdTest() throws Exception {
+	public void testGenerateStringQueryByCustomerId() throws Exception {
 		String customerId = "John Quiroga";
 		String accountNumber = "*";
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue("customerId = 'John Quiroga'".equals(query));
+		Assert.assertTrue("customerId = 'John Quiroga' ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryByCustomerIdNullTest() throws Exception {
+	public void testGenerateStringQueryByCustomerIdNull() throws Exception {
 		String customerId = null;
 		String accountNumber = "*";
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(query.isEmpty());
+		Assert.assertTrue(" ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryByCustomerIdEmptyTest() throws Exception {
+	public void testGenerateStringQueryByCustomerIdEmpty() throws Exception {
 		String customerId = "";
 		String accountNumber = "*";
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(query.isEmpty());
+		Assert.assertTrue(" ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryByAccountNumberTest() throws Exception {
+	public void testGenerateStringQueryByAccountNumber() throws Exception {
 		String customerId = "*";
 		String accountNumber = "MyaccountNumber";
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(" number = 'MyaccountNumber' ".equals(query));
+		Assert.assertTrue(" numberaccount = 'MyaccountNumber'  ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryByAccountNumberLikeTest() throws Exception {
+	public void testGenerateStringQueryByAccountNumberLike() throws Exception {
 		String customerId = "*";
 		String accountNumber = "My*accountNumber";
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(" number like 'My%accountNumber' ".equals(query));
+		Assert.assertTrue(" numberaccount like 'My%accountNumber'  ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryByAccountNumberNullTest() throws Exception {
+	public void testGenerateStringQueryByAccountNumberNull() throws Exception {
 		String customerId = "*";
 		String accountNumber = null;
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(query.isEmpty());
+		Assert.assertTrue(" ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryByAccountNumberEmptyTest() throws Exception {
+	public void testGenerateStringQueryByAccountNumberEmpty() throws Exception {
 		String customerId = "*";
 		String accountNumber = "";
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(query.isEmpty());
+		Assert.assertTrue(" ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryByBalanceTest() throws Exception {
+	public void testGenerateStringQueryByBalance() throws Exception {
 		String customerId = "*";
 		String accountNumber = "*";
 		BigDecimal balance = new BigDecimal(1);
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(" balance = 1 ".equals(query));
+		Assert.assertTrue(" balance = 1  ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
-	public void generateStringQueryByBalanceNullTest() throws Exception {
+	public void testGenerateStringQueryByBalanceNull() throws Exception {
 		String customerId = "*";
 		String accountNumber = "*";
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(query.isEmpty());
+		Assert.assertTrue(" ORDER BY numberaccount".equals(query));
 	}
 	
 }

@@ -28,7 +28,6 @@ public class ProcessorTest {
 	public void prepareSpace() {
 		gigaSpace.clear(null);
 		
-		System.out.println("Before test");
 		Customer customer = new Customer();
 		customer.setName("John Quiroga");
 		customer.setPhone("3013684621");
@@ -36,13 +35,13 @@ public class ProcessorTest {
 		gigaSpace.write(customer);
 		
 		Account account = new Account();
-		account.setNumber("123456");
+		account.setNumberAccount("123456");
 		account.setBalance(new BigDecimal(100));
 		
 		customer = gigaSpace.read(customer);
 		account.setCustomerId(customer.getId());
-		gigaSpace.write(account);
 		
+		gigaSpace.write(account);
 	}
 
     @After
@@ -55,9 +54,8 @@ public class ProcessorTest {
     	Movement mov = new Movement();
     	
     	Account account = new Account();
-		account.setNumber("123456");
+		account.setNumberAccount("123456");
 		account = gigaSpace.read(account);
-		System.out.println("account: " + account);
     	
     	mov.setAccountId(account.getId());
     	mov.setValue(new BigDecimal(20));
@@ -65,11 +63,14 @@ public class ProcessorTest {
     	mov.setProcessed(false);
         gigaSpace.write(mov);
 
+        try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+		}
         Movement template = new Movement();
         template.setProcessed(true);
 
         Movement result = gigaSpace.read(template);
-        
         Assert.notNull(result);
         Assert.isTrue(result.isProcessed());
     }

@@ -38,9 +38,9 @@ public class AccountRepository<J extends Account> extends AbstractRepository<Acc
 			if (accountNumber.contains("*")) {
 				String toReplace = accountNumber; 
 				toReplace = toReplace.replaceAll("\\*", "\\%");
-				query.append(String.format(" number like '%s' ", toReplace));
+				query.append(String.format(" numberaccount like '%s' ", toReplace));
 			} else {
-				query.append(String.format(" number = '%s' ", accountNumber));
+				query.append(String.format(" numberaccount = '%s' ", accountNumber));
 			}
 		}
 		if (balance != null) {
@@ -49,6 +49,8 @@ public class AccountRepository<J extends Account> extends AbstractRepository<Acc
 			}
 			query.append(String.format(" balance = %s ", balance));
 		}
+		
+		query.append(" ORDER BY numberaccount");
 		
 		return query.toString();
 	}

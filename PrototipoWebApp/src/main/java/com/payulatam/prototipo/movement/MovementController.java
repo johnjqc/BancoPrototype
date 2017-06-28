@@ -50,7 +50,7 @@ public class MovementController extends BaseController<Movement> {
         
         Account[] accounts = respositoryAccount.findAll();
         for (int i = 0; i < accounts.length; i++) {
-        	Comboitem comboitem = new Comboitem(accounts[i].getNumber());
+        	Comboitem comboitem = new Comboitem(accounts[i].getNumberAccount());
         	comboitem.setValue(accounts[i].getId());
         	comboitem.setParent(comboboxAccount);
 		}
@@ -65,9 +65,9 @@ public class MovementController extends BaseController<Movement> {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 Account account = gigaSpace.readById(Account.class, prod.getAccountId());
                 
-                new Label(account.getNumber()).setParent(row);
+                new Label(account.getNumberAccount()).setParent(row);
                 new Label(prod.getType().toString()).setParent(row);
-                new Label(sdf.format(prod.getDate())).setParent(row);
+                new Label(sdf.format(prod.getMovementDate())).setParent(row);
                 new Label(prod.getValue().toString()).setParent(row);
                 
                 Cell buttons = new Cell();

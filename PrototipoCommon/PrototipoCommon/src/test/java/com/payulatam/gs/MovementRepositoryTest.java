@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.payulatam.model.Movement;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(locations = { "classpath:/Test-context.xml" })
 public class MovementRepositoryTest {
 	
 	@Autowired
@@ -35,7 +35,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" ORDER BY movementdate".equals(query));
 	}
     
     @Test
@@ -46,7 +46,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -57,9 +57,8 @@ public class MovementRepositoryTest {
 		BigDecimal balance = new BigDecimal(1);
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		
-		String sDate = query.substring(query.indexOf("date = '") + 8, query.indexOf("'  and  value"));
-		Assert.assertTrue(("accountId = 'customerId' and  type = 'MytypeMovement'  and  date = '" + sDate + "'  and  value = 1  ORDER BY com.payulatam.model.Movement.date").equals(query));
+		String sDate = query.substring(query.indexOf("movementdate = '") + 16, query.indexOf("'  and  value"));
+		Assert.assertTrue(("accountId = 'customerId' and  type = 'MytypeMovement'  and  movementdate = '" + sDate + "'  and  value = 1  ORDER BY movementdate").equals(query));
 	}
 	
 	@Test
@@ -70,7 +69,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = new BigDecimal(1);
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue("accountId = 'customerId*' and  type = 'MytypeMovement*'  and  value = 1  ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue("accountId = 'customerId*' and  type = 'MytypeMovement*'  and  value = 1  ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -81,7 +80,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -92,7 +91,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue("accountId = 'John Quiroga' ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue("accountId = 'John Quiroga' ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -103,7 +102,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -114,7 +113,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -125,7 +124,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" type = 'MytypeMovement'  ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" type = 'MytypeMovement'  ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -136,7 +135,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" type = 'My*typeMovement'  ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" type = 'My*typeMovement'  ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -147,7 +146,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -158,7 +157,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -169,7 +168,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = new BigDecimal(1);
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" value = 1  ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" value = 1  ORDER BY movementdate".equals(query));
 	}
 	
 	@Test
@@ -180,7 +179,7 @@ public class MovementRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, typeMovement, date, balance);
-		Assert.assertTrue(" ORDER BY com.payulatam.model.Movement.date".equals(query));
+		Assert.assertTrue(" ORDER BY movementdate".equals(query));
 	}
 	
 }

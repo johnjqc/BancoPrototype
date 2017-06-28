@@ -24,7 +24,7 @@
 				</row>
 				<row>
 					<label value="${labels.account.balance}" />
-					<decimalbox format="###############.##" id="decimalboxBalance" width="250px" tabindex="1" />
+					<decimalbox format="#,###.00" id="decimalboxBalance" width="250px" tabindex="1" />
 				</row>
 				<row>
                     <cell colspan="2" style="text-align:center">

@@ -1,6 +1,7 @@
 package com.payulatam.gs;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.openspaces.core.GigaSpace;
@@ -27,6 +28,7 @@ public class MovementRepository<J extends Movement> extends AbstractRepository<M
 	}
 	
 	public String generateStringQuery(String customerId, String typeMovement, Date date, BigDecimal balance) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
 		StringBuilder query = new StringBuilder();
 		if (customerId != null && !"*".equals(customerId) && !customerId.isEmpty()) {
 			query.append(String.format("accountId = '%s'", customerId));
@@ -42,7 +44,7 @@ public class MovementRepository<J extends Movement> extends AbstractRepository<M
 			if (!query.toString().isEmpty()) {
 				query.append(" and ");
 			}
-			query.append(String.format(" date = '%s' ", date));
+			query.append(String.format(" movementdate = '%s' ", sdf.format(date)));
 		}
 		
 		if (balance != null) {
@@ -51,7 +53,7 @@ public class MovementRepository<J extends Movement> extends AbstractRepository<M
 			}
 			query.append(String.format(" value = %s ", balance));
 		}
-		query.append(" ORDER BY com.payulatam.model.Movement.date");
+		query.append(" ORDER BY movementdate");
 		
 		return query.toString();
 	}

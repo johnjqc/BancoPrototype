@@ -66,7 +66,7 @@ public class AccountDetailController extends GenericForwardComposer {
         			}
         		}
         		comboboxCustomer.setSelectedIndex(indexItem);
-        		textboxNumber.setText(actualAccount.getNumber());
+        		textboxNumber.setText(actualAccount.getNumberAccount());
         		textboxBalance.setText(actualAccount.getBalance().toString());
         	}
         }
@@ -75,7 +75,7 @@ public class AccountDetailController extends GenericForwardComposer {
 	public void onClick$buttonNew() {
 		actualAccount = new Account();
 		
-		actualAccount.setNumber(textboxNumber.getText());
+		actualAccount.setNumberAccount(textboxNumber.getText());
 		actualAccount.setBalance(new BigDecimal(textboxBalance.getText()));
 		actualAccount.setCustomerId("" + comboboxCustomer.getSelectedItem().getValue());
 		actualAccount.setSpacerouting(1L);
@@ -84,7 +84,7 @@ public class AccountDetailController extends GenericForwardComposer {
 	}
 	
 	public void onClick$buttonEdit() {
-		actualAccount.setNumber(textboxNumber.getText());
+		actualAccount.setNumberAccount(textboxNumber.getText());
 		actualAccount.setBalance(new BigDecimal(textboxBalance.getText()));
 		actualAccount.setCustomerId("" + comboboxCustomer.getSelectedItem().getValue());
 		gigaSpace.write(actualAccount);

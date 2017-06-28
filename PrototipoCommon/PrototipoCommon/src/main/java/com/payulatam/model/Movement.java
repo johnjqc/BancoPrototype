@@ -3,6 +3,7 @@ package com.payulatam.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,7 +27,8 @@ public class Movement extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Temporal(TemporalType.DATE)
-	private Date date;
+	@Column(name="movementdate")
+	private Date movementDate;
 
 	@Enumerated(EnumType.STRING)
 	private String type;
@@ -40,12 +42,12 @@ public class Movement extends BaseEntity {
 	public Movement() {
 	}
 
-	public Date getDate() {
-		return this.date;
+	public Date getMovementDate() {
+		return this.movementDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setMovementDate(Date movementDate) {
+		this.movementDate = movementDate;
 	}
 
 	@Override

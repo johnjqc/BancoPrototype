@@ -15,7 +15,7 @@
         ]]>
     </zscript>
     <window self="@{define(content)}" >
-    	<h:image src="../images/404.png" width="300px" style="margin-left: auto; margin-right: auto; display: block;" />
+    	<h:image src="./images/404.png" width="300px" style="margin-left: auto; margin-right: auto; display: block;" />
         <vbox apply="com.payulatam.prototipo.tools.ErrorController" sclass="errorbox" width="96%">
         
             <label value="The page that you are requesting does not exist." />
@@ -25,7 +25,6 @@
                     <label value="${labels.app.backToHome}" />
                 </n:a>
             </hbox>
-            <label value="If you reached this page from another page of LibrePlan please notify us in order to fix it as soon as possible." />
             <label value="Sorry for the inconvenience." />
         </vbox>
     </window>

@@ -56,7 +56,7 @@ public class AccountController extends BaseController<Account> {
                 Customer customer = gigaSpace.readById(Customer.class, prod.getCustomerId());
                 		
                 new Label(customer.getName()).setParent(row);
-                new Label(prod.getNumber()).setParent(row);
+                new Label(prod.getNumberAccount()).setParent(row);
                 new Label(prod.getBalance().toString()).setParent(row);
                 
                 Cell buttons = new Cell();
@@ -89,6 +89,7 @@ public class AccountController extends BaseController<Account> {
 	@Override
 	public void onClick$buttonSearch() {
 		Comboitem itemCustomer = comboboxCustomer.getSelectedItem();
+		System.out.println(decimalboxBalance.getValue());
 		Account[] result = respository.serach(String.valueOf(itemCustomer.getValue()), 
 				textboxNumber.getText(), decimalboxBalance.getValue());
 		setModel(result);
