@@ -25,8 +25,6 @@ public class AccountDetailController extends GenericForwardComposer {
 	@GigaSpaceContext
     protected GigaSpace gigaSpace;
 	
-//	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
-	
 	private Account actualAccount;
 	
 	private Combobox comboboxCustomer;

@@ -24,8 +24,6 @@ public class CustomerDetailController extends GenericForwardComposer {
 	@GigaSpaceContext
     protected GigaSpace gigaSpace;
 	
-//	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
-	
 	private Customer actualCustomer;
 	
 	private Textbox textboxCustomer;

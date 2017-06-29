@@ -92,7 +92,6 @@ public class AccountController extends BaseController<Account> {
 	@Override
 	public void onClick$buttonSearch() {
 		Comboitem itemCustomer = comboboxCustomer.getSelectedItem();
-		System.out.println(decimalboxBalance.getValue());
 		Account[] result = respository.serach(String.valueOf(itemCustomer.getValue()), 
 				textboxNumber.getText(), decimalboxBalance.getValue());
 		setModel(result);

@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Select;
 
 import com.payulatam.model.Customer;
 
-public interface CustomerDAO {
+public interface CustomerMapper {
 	
-	@Select("select * from account")
+	@Select("select * from customer")
 	public List<Customer> getAllCustomer();
 
 }

@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.payulatam.model.Customer;
-import com.payulatam.mybatis.CustomerDAO;
+import com.payulatam.mybatis.CustomerMapper;
 
 @Service
 @Transactional
 public class CustomerServiceDAOImpl implements CustomerServiceDAO {
 	
-	@Autowired(required=true)
-	private CustomerDAO customerDAOMapper;
+	@Autowired
+	private CustomerMapper customerDAOMapper;
 
 	@Override
 	public List<Customer> getAllCustomer() {

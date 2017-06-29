@@ -33,8 +33,6 @@ public class MovementDetailController extends GenericForwardComposer {
 	@GigaSpaceContext
     protected GigaSpace gigaSpace;
 	
-//	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
-	
 	private Movement actualMovement;
 	
 	private Button buttonNew;

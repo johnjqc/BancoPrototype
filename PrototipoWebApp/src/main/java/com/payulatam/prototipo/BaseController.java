@@ -21,8 +21,6 @@ public abstract class BaseController<J extends BaseEntity> extends GenericForwar
 	@GigaSpaceContext
     protected GigaSpace gigaSpace;
 	
-//	protected GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
-	
 	protected Grid gridResults;
 	protected ListModelList prodModel;
 	protected J actualObject;

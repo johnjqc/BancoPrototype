@@ -31,7 +31,7 @@
 				<row>
                     <cell colspan="4" style="text-align:center">
                         <vlayout>
-                            <button id="buttonSearch" label="Generar Reporte" width="130px" height="30px" />
+                            <button id="buttonGenerate" label="Generar Reporte" width="130px" height="30px" />
                         </vlayout>
                     </cell>
                 </row>
