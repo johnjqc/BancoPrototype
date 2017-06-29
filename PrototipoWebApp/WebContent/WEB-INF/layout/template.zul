@@ -3,6 +3,7 @@
 
 <?page title="Prototipo PayUBank" contentType="text/html;charset=UTF-8"?>
 <?link rel="shortcut icon" type="image/x-icon" href="../images/Favicon.ico"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 
 <zk xmlns:h="xhtml">
 	<window border="none" width="60%" mode="overlapped" position="top, center">

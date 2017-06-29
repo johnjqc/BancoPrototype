@@ -18,12 +18,12 @@ import org.zkoss.zul.RowRenderer;
 
 import com.payulatam.common.Constantes;
 import com.payulatam.enums.MovementType;
-import com.payulatam.gs.AccountRepository;
-import com.payulatam.gs.MovementRepository;
 import com.payulatam.model.Account;
 import com.payulatam.model.Movement;
 import com.payulatam.prototipo.BaseController;
 import com.payulatam.prototipo.ControllerHelper;
+import com.payulatam.prototipo.gs.AccountRepository;
+import com.payulatam.prototipo.gs.MovementRepository;
 
 /**
  * Controller for Movement
@@ -34,8 +34,8 @@ public class MovementController extends BaseController<Movement> {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
 	
-	MovementRepository<Movement> respository = new MovementRepository<>(gigaSpace);
-	AccountRepository<Account> respositoryAccount = new AccountRepository<>(gigaSpace);
+	MovementRepository<Movement> respository;
+	AccountRepository<Account> respositoryAccount;
 	
 	private Combobox comboboxAccount;
 	private Combobox comboboxType;
@@ -45,6 +45,9 @@ public class MovementController extends BaseController<Movement> {
 	@Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
+        
+        respository = new MovementRepository<>(gigaSpace);
+    	respositoryAccount = new AccountRepository<>(gigaSpace);
         
         ControllerHelper.setItemDefault(comboboxAccount);
         

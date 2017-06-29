@@ -1,4 +1,4 @@
-package com.payulatam.gs;
+package com.payulatam.prototipo.gs;
 
 import java.util.Arrays;
 
@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.payulatam.model.Customer;
+import com.payulatam.prototipo.gs.CustomerRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/Test-context.xml" })

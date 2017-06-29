@@ -1,4 +1,4 @@
-package com.payulatam.gs;
+package com.payulatam.prototipo.gs;
 
 import com.payulatam.model.Customer;
 

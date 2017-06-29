@@ -1,6 +1,7 @@
 package com.payulatam.prototipo.customer;
 
 import org.openspaces.core.GigaSpace;
+import org.openspaces.core.context.GigaSpaceContext;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -9,7 +10,6 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Textbox;
 
 import com.payulatam.common.Constantes;
-import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.model.Customer;
 
 /**
@@ -21,7 +21,10 @@ public class CustomerDetailController extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 2409508627321213561L;
 	
-	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
+	@GigaSpaceContext
+    protected GigaSpace gigaSpace;
+	
+//	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
 	
 	private Customer actualCustomer;
 	

@@ -15,19 +15,19 @@ import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 
 import com.payulatam.common.Constantes;
-import com.payulatam.gs.AccountRepository;
-import com.payulatam.gs.CustomerRepository;
 import com.payulatam.model.Account;
 import com.payulatam.model.Customer;
 import com.payulatam.prototipo.BaseController;
 import com.payulatam.prototipo.ControllerHelper;
+import com.payulatam.prototipo.gs.AccountRepository;
+import com.payulatam.prototipo.gs.CustomerRepository;
 
 public class AccountController extends BaseController<Account> {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
 	
-	AccountRepository<Account> respository = new AccountRepository<>(gigaSpace);
-	CustomerRepository<Customer> respositoryCustomer = new CustomerRepository<>(gigaSpace);
+	AccountRepository<Account> respository;
+	CustomerRepository<Customer> respositoryCustomer;
 	
 	private Combobox comboboxCustomer;
 	private Textbox textboxNumber;
@@ -36,6 +36,9 @@ public class AccountController extends BaseController<Account> {
 	@Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
+		
+        respository = new AccountRepository<>(gigaSpace);
+    	respositoryCustomer = new CustomerRepository<>(gigaSpace);
         
         ControllerHelper.setItemDefault(comboboxCustomer);
     	

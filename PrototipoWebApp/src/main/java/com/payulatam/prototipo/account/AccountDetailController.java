@@ -3,6 +3,7 @@ package com.payulatam.prototipo.account;
 import java.math.BigDecimal;
 
 import org.openspaces.core.GigaSpace;
+import org.openspaces.core.context.GigaSpaceContext;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -14,7 +15,6 @@ import org.zkoss.zul.Textbox;
 
 import com.j_spaces.core.client.SQLQuery;
 import com.payulatam.common.Constantes;
-import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.model.Account;
 import com.payulatam.model.Customer;
 
@@ -22,7 +22,10 @@ public class AccountDetailController extends GenericForwardComposer {
 
 	private static final long serialVersionUID = 2409508627321213561L;
 	
-	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
+	@GigaSpaceContext
+    protected GigaSpace gigaSpace;
+	
+//	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
 	
 	private Account actualAccount;
 	

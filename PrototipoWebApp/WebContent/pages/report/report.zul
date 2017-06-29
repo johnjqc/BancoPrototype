@@ -31,22 +31,14 @@
 				<row>
                     <cell colspan="4" style="text-align:center">
                         <vlayout>
-                            <button id="buttonSearch" label="${labels.app.search}" width="100px" height="30px" />
+                            <button id="buttonSearch" label="Generar Reporte" width="130px" height="30px" />
                         </vlayout>
                     </cell>
                 </row>
 			</rows>
 		</grid>
-		<toolbar apply="">
-			<toolbarbutton id="btnNew" label="${labels.account.new}" image="/images/icon-new.png" />
-		</toolbar>
 		<grid id="gridResults" mold="paging" pagingPosition="both" pageSize="10">
-			<columns>
-				<column width="150px" >${labels.customer.id}</column>
-				<column  >${labels.account.number}</column>
-				<column  >${labels.account.balance}</column>
-				<column  />
-			</columns>
+			
 		</grid>
 	</vlayout>
 </zk>

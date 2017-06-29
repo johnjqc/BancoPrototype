@@ -50,4 +50,9 @@ public class Customer extends BaseEntity {
 		this.phone = phone;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [address=" + address + ", name=" + name + ", phone=" + phone + "]";
+	}
+	
 }

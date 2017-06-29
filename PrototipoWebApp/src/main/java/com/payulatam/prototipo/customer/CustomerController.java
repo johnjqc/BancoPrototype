@@ -12,9 +12,9 @@ import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 
 import com.payulatam.common.Constantes;
-import com.payulatam.gs.CustomerRepository;
 import com.payulatam.model.Customer;
 import com.payulatam.prototipo.BaseController;
+import com.payulatam.prototipo.gs.CustomerRepository;
 
 /**
  * Customer controller for view
@@ -25,7 +25,7 @@ public class CustomerController extends BaseController<Customer> {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
 	
-	CustomerRepository<Customer> respository = new CustomerRepository<>(gigaSpace);
+	CustomerRepository<Customer> respository;
 	
 	private Textbox textboxCustomer;
 	private Textbox textboxAddress;
@@ -34,6 +34,8 @@ public class CustomerController extends BaseController<Customer> {
 	@Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
+        
+        respository = new CustomerRepository<>(gigaSpace);
         
         textboxCustomer.setText("*");
         textboxAddress.setText("*");

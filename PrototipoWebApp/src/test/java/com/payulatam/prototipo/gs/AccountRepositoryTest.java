@@ -1,4 +1,4 @@
-package com.payulatam.gs;
+package com.payulatam.prototipo.gs;
 
 import java.math.BigDecimal;
 
@@ -25,12 +25,24 @@ public class AccountRepositoryTest {
 	@Before
 	public void before() throws Exception {
 		repo = new AccountRepository<>(gigaSpace);
+		Account account = new Account();
+		account.setNumberAccount("123");
+		account.setBalance(new BigDecimal(100));
+		gigaSpace.write(account);
+		account = gigaSpace.read(account);
 	}
 	
     @After
     public void clearSpace() {
         gigaSpace.clear(null);
     }
+    
+    @Test
+	public void testSearch() throws Exception {
+		Account[] actual = repo.serach(null, "123", null);
+		Assert.assertTrue(actual.length == 1);
+		Assert.assertTrue("123".equals(actual[0].getNumberAccount()));
+	}
     
 	@Test
 	public void testGenerateStringQueryWhithDefault() throws Exception {
@@ -59,7 +71,7 @@ public class AccountRepositoryTest {
 		BigDecimal balance = new BigDecimal(1);
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue("customerId = 'customerId' and  numberaccount = 'MyaccountNumber'  and  balance = 1  ORDER BY numberaccount".equals(query));
+		Assert.assertTrue("customerId = 'customerId' and  numberAccount = 'MyaccountNumber'  and  balance = 1  ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
@@ -69,7 +81,7 @@ public class AccountRepositoryTest {
 		BigDecimal balance = new BigDecimal(1);
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue("customerId = 'customerId*' and  numberaccount like 'MyaccountNumber%'  and  balance = 1  ORDER BY numberaccount".equals(query));
+		Assert.assertTrue("customerId = 'customerId*' and  numberAccount like 'MyaccountNumber%'  and  balance = 1  ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
@@ -119,7 +131,7 @@ public class AccountRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(" numberaccount = 'MyaccountNumber'  ORDER BY numberaccount".equals(query));
+		Assert.assertTrue(" numberAccount = 'MyaccountNumber'  ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test
@@ -129,7 +141,7 @@ public class AccountRepositoryTest {
 		BigDecimal balance = null;
 		
 		String query = repo.generateStringQuery(customerId, accountNumber, balance);
-		Assert.assertTrue(" numberaccount like 'My%accountNumber'  ORDER BY numberaccount".equals(query));
+		Assert.assertTrue(" numberAccount like 'My%accountNumber'  ORDER BY numberaccount".equals(query));
 	}
 	
 	@Test

@@ -1,4 +1,4 @@
-package com.payulatam.gs;
+package com.payulatam.prototipo.gs;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;

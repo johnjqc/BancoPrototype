@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.openspaces.core.GigaSpace;
+import org.openspaces.core.context.GigaSpaceContext;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -15,7 +16,6 @@ import org.zkoss.zul.Decimalbox;
 
 import com.j_spaces.core.client.SQLQuery;
 import com.payulatam.common.Constantes;
-import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.enums.MovementType;
 import com.payulatam.model.Account;
 import com.payulatam.model.Movement;
@@ -30,7 +30,10 @@ public class MovementDetailController extends GenericForwardComposer {
 	
 	private static final long serialVersionUID = 6077674101236551588L;
 	
-	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
+	@GigaSpaceContext
+    protected GigaSpace gigaSpace;
+	
+//	private GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
 	
 	private Movement actualMovement;
 	

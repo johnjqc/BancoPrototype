@@ -1,11 +1,11 @@
 package com.payulatam.prototipo;
 
 import org.openspaces.core.GigaSpace;
+import org.openspaces.core.context.GigaSpaceContext;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModelList;
 
-import com.payulatam.common.GigaSpaceHelper;
 import com.payulatam.model.BaseEntity;
 
 /**
@@ -18,7 +18,11 @@ public abstract class BaseController<J extends BaseEntity> extends GenericForwar
 	
 	private static final long serialVersionUID = 1L;
 	
-	protected GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
+	@GigaSpaceContext
+    protected GigaSpace gigaSpace;
+	
+//	protected GigaSpace gigaSpace = GigaSpaceHelper.getGigaSpace();
+	
 	protected Grid gridResults;
 	protected ListModelList prodModel;
 	protected J actualObject;

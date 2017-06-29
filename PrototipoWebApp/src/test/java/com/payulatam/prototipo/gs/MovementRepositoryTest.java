@@ -1,10 +1,11 @@
-package com.payulatam.gs;
+package com.payulatam.prototipo.gs;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openspaces.core.GigaSpace;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.payulatam.enums.MovementType;
 import com.payulatam.model.Movement;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,10 +24,27 @@ public class MovementRepositoryTest {
     GigaSpace gigaSpace;
 	private MovementRepository<Movement> repo = new MovementRepository<>(gigaSpace);
 	
+	@Before
+	public void before() throws Exception {
+		repo = new MovementRepository<>(gigaSpace);
+		Movement mov = new Movement();
+		mov.setType(MovementType.DEBIT.toString());
+		mov.setValue(new BigDecimal(100));
+		gigaSpace.write(mov);
+		mov = gigaSpace.read(mov);
+	}
+	
     @After
     public void clearSpace() {
         gigaSpace.clear(null);
     }
+    
+    @Test
+	public void testSearch() throws Exception {
+    	Movement[] actual = repo.serach(null, MovementType.DEBIT.toString(), null, null);
+		Assert.assertTrue(actual.length == 1);
+		Assert.assertTrue(MovementType.DEBIT.toString().equals(actual[0].getType()));
+	}
     
     @Test
 	public void generateStringQueryWhithDefaultTest() throws Exception {

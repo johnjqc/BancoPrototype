@@ -1,4 +1,4 @@
-package com.payulatam.gs;
+package com.payulatam.prototipo.gs;
 
 import org.openspaces.core.GigaSpace;
 import org.springframework.core.GenericTypeResolver;

@@ -1,4 +1,4 @@
-package com.payulatam.gs;
+package com.payulatam.prototipo.gs;
 
 import java.math.BigDecimal;
 
@@ -38,9 +38,9 @@ public class AccountRepository<J extends Account> extends AbstractRepository<Acc
 			if (accountNumber.contains("*")) {
 				String toReplace = accountNumber; 
 				toReplace = toReplace.replaceAll("\\*", "\\%");
-				query.append(String.format(" numberaccount like '%s' ", toReplace));
+				query.append(String.format(" numberAccount like '%s' ", toReplace));
 			} else {
-				query.append(String.format(" numberaccount = '%s' ", accountNumber));
+				query.append(String.format(" numberAccount = '%s' ", accountNumber));
 			}
 		}
 		if (balance != null) {
