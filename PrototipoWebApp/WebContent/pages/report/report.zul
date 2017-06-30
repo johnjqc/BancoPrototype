@@ -38,7 +38,12 @@
 			</rows>
 		</grid>
 		<grid id="gridResults" mold="paging" pagingPosition="both" pageSize="10">
-			
+			<columns>
+				<column width="150px" >Numero de Cuenta</column>
+				<column  >Saldo</column>
+				<column  >Debitos</column>
+				<column  >Creditos</column>
+			</columns>
 		</grid>
 	</vlayout>
 </zk>
