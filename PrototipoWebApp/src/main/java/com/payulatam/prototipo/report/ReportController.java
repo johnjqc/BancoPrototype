@@ -60,15 +60,16 @@ public class ReportController extends BaseController<Customer> {
         gridResults.setRowRenderer(new RowRenderer() {
             public void render(Row row, Object data) throws Exception {
                 final Report report = (Report)data;
-                System.out.println(report.getAccountNumber());
                 new Label(report.getAccountNumber()).setParent(row);
                 new Label(report.getBalance().toString()).setParent(row);
                 new Label(report.getMovements().stream()
-                		.filter(item -> "DEBIT".equals(item.getTypeMovement())).findFirst().get().getTotal()
+                		.filter(item -> "DEBIT".equals(item.getTypeMovement()))
+                		.findFirst().orElse(new TotalTypesMovement()).getTotal()
                 		).setParent(row);
                 
                 new Label(report.getMovements().stream()
-                		.filter(item -> "CREDIT".equals(item.getTypeMovement())).findFirst().get().getTotal()
+                		.filter(item -> "CREDIT".equals(item.getTypeMovement()))
+                		.findFirst().orElse(new TotalTypesMovement()).getTotal()
                 		).setParent(row);
                 
             }

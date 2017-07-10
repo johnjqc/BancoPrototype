@@ -11,10 +11,19 @@ import java.util.List;
  */
 public class Report {
 
+	/**
+	 * Numeo de cuenta
+	 */
 	private String accountNumber;
 	
+	/**
+	 * Saldo de cuenta
+	 */
 	private BigDecimal balance;
 	
+	/**
+	 * Total de movimientos por tipo
+	 */
 	private List<TotalTypesMovement> movements;
 
 	public String getAccountNumber() {

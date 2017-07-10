@@ -16,6 +16,10 @@ public class TotalTypesMovement {
 	 * Total value of types
 	 */
 	private String total;
+	
+	public TotalTypesMovement() {
+		total = "0";
+	}
 
 	public String getTypeMovement() {
 		return typeMovement;
