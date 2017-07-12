@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.payulatam.model.Account;
 import com.payulatam.mybatis.AccountMapper;
 
+/**
+ * DAO Implementation for Account
+ * @author John
+ *
+ */
 @Service
 @Transactional
 public class AccountServiceDAOImpl implements AccountServiceDAO {

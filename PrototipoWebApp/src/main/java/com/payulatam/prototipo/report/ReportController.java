@@ -23,16 +23,46 @@ import com.payulatam.model.Customer;
 import com.payulatam.prototipo.BaseController;
 import com.payulatam.prototipo.gs.CustomerRepository;
 
+/**
+ * Controller Report ZK view
+ * @author John
+ *
+ */
 public class ReportController extends BaseController<Customer> {
 
+	/**
+	 * Serial number
+	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Repository DAO customer
+	 */
 	private CustomerRepository<Customer> respoCustomer;
+	
+	/**
+	 * Repository DAO account
+	 */
 	private AccountServiceDAO accountDAO;
+	
+	/**
+	 * Repository DAO movement
+	 */
 	private MovementServiceDAO movementDAO;
 	
+	/**
+	 * Combobox customer
+	 */
 	private Combobox comboboxCustomer;
+	
+	/**
+	 * Datebox initial date
+	 */
 	private Datebox dateboxDateInitial;
+	
+	/**
+	 * Datebox final date
+	 */
 	private Datebox dateboxDateFinal;
 	
 	@Override

@@ -22,15 +22,41 @@ import com.payulatam.prototipo.ControllerHelper;
 import com.payulatam.prototipo.gs.AccountRepository;
 import com.payulatam.prototipo.gs.CustomerRepository;
 
+/**
+ * Account Controller ZK
+ * @author John Quiroga
+ *
+ */
 public class AccountController extends BaseController<Account> {
 	
+	/**
+	 * Serial number
+	 */
 	private static final long serialVersionUID = 6077674101236551588L;
 	
+	/**
+	 * Repository DAO Account
+	 */
 	AccountRepository<Account> respository;
+	
+	/**
+	 * Repository DAO Customer
+	 */
 	CustomerRepository<Customer> respositoryCustomer;
 	
+	/**
+	 * Combobox component
+	 */
 	private Combobox comboboxCustomer;
+	
+	/**
+	 * Textbox component 
+	 */
 	private Textbox textboxNumber;
+	
+	/**
+	 * Decimalbox component
+	 */
 	private Decimalbox decimalboxBalance;
 	
 	@Override

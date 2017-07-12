@@ -19,17 +19,43 @@ import com.payulatam.model.Customer;
  */
 public class CustomerDetailController extends GenericForwardComposer {
 
+	/**
+	 * Serial number
+	 */
 	private static final long serialVersionUID = 2409508627321213561L;
 	
 	@GigaSpaceContext
     protected GigaSpace gigaSpace;
 	
+	/**
+	 * Actual objects customer
+	 */
 	private Customer actualCustomer;
 	
+
+	/**
+	 * Textbox component
+	 */
 	private Textbox textboxCustomer;
+
+	/**
+	 * Textbox component
+	 */
 	private Textbox textboxAddress;
+
+	/**
+	 * Textbox component
+	 */
 	private Textbox textboxPhone;
+
+	/**
+	 * Button component
+	 */
 	private Button buttonEdit;
+
+	/**
+	 * Button component
+	 */
 	private Button buttonNew;
 	
 	

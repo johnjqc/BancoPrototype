@@ -9,6 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.payulatam.model.Customer;
 import com.payulatam.mybatis.CustomerMapper;
 
+/**
+ * DAO Implementation for Customer
+ * @author John
+ *
+ */
 @Service
 @Transactional
 public class CustomerServiceDAOImpl implements CustomerServiceDAO {

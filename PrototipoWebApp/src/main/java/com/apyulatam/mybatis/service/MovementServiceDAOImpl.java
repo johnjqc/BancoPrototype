@@ -12,7 +12,7 @@ import com.payulatam.model.Movement;
 import com.payulatam.mybatis.MovementMapper;
 
 /**
- * Mapper for Account 
+ * DAO Implementation for Account 
  * @author john.quiroga
  *
  */

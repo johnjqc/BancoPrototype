@@ -32,14 +32,39 @@ import com.payulatam.prototipo.gs.MovementRepository;
  */
 public class MovementController extends BaseController<Movement> {
 	
+	/**
+	 * Serial number
+	 */
 	private static final long serialVersionUID = 6077674101236551588L;
 	
+	/**
+	 * Repository DAO Movement
+	 */
 	MovementRepository<Movement> respository;
-	AccountRepository<Account> respositoryAccount;
 	
+	/**
+	 * Repository DAO Account
+	 */
+	AccountRepository<Account> respositoryAccount;
+
+	/**
+	 * Combobox component
+	 */
 	private Combobox comboboxAccount;
+
+	/**
+	 * Combobox component
+	 */
 	private Combobox comboboxType;
+
+	/**
+	 * Datebox component
+	 */
 	private Datebox dateboxDate;
+
+	/**
+	 * DEcimalbox component
+	 */
 	private Decimalbox decimalboxValue;
 	
 	@Override

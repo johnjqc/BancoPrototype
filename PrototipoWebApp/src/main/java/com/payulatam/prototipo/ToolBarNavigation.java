@@ -13,6 +13,9 @@ import com.payulatam.common.Constantes;
  */
 public class ToolBarNavigation extends GenericForwardComposer {
 
+	/**
+	 * Serial number
+	 */
 	private static final long serialVersionUID = -2722298524312259715L;
 	
 	/**

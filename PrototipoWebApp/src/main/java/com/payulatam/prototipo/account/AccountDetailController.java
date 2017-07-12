@@ -18,19 +18,49 @@ import com.payulatam.common.Constantes;
 import com.payulatam.model.Account;
 import com.payulatam.model.Customer;
 
+/**
+ * Account Detail Controller ZK
+ * @author John
+ *
+ */
 public class AccountDetailController extends GenericForwardComposer {
 
+	/**
+	 * Serial number
+	 */
 	private static final long serialVersionUID = 2409508627321213561L;
 	
 	@GigaSpaceContext
     protected GigaSpace gigaSpace;
 	
+	/**
+	 * Actual account object
+	 */
 	private Account actualAccount;
 	
+	/**
+	 * Combobox component
+	 */
 	private Combobox comboboxCustomer;
+	
+	/**
+	 * Textbox component
+	 */
 	private Textbox textboxNumber;
+	
+	/**
+	 * Textbox component
+	 */
 	private Textbox textboxBalance;
+	
+	/**
+	 * Button component
+	 */
 	private Button buttonEdit;
+	
+	/**
+	 * Button component
+	 */
 	private Button buttonNew;
 	
 	

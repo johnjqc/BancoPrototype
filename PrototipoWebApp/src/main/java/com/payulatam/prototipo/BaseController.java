@@ -16,13 +16,27 @@ import com.payulatam.model.BaseEntity;
  */
 public abstract class BaseController<J extends BaseEntity> extends GenericForwardComposer {
 	
+	/**
+	 * Serial number
+	 */
 	private static final long serialVersionUID = 1L;
 	
 	@GigaSpaceContext
     protected GigaSpace gigaSpace;
 	
+	/**
+	 * Grind ZK with results of query
+	 */
 	protected Grid gridResults;
+	
+	/**
+	 * List Model for grid results of query
+	 */
 	protected ListModelList prodModel;
+	
+	/**
+	 * Actual object selected on query result
+	 */
 	protected J actualObject;
 	
 	/**

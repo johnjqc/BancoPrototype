@@ -23,12 +23,29 @@ import com.payulatam.prototipo.gs.CustomerRepository;
  */
 public class CustomerController extends BaseController<Customer> {
 	
+	/**
+	 * Serial number
+	 */
 	private static final long serialVersionUID = 6077674101236551588L;
 	
+	/**
+	 * Repository DAO customer
+	 */
 	CustomerRepository<Customer> respository;
 	
+	/**
+	 * Textbox component
+	 */
 	private Textbox textboxCustomer;
+
+	/**
+	 * Textbox component
+	 */
 	private Textbox textboxAddress;
+
+	/**
+	 * Textbox component
+	 */
 	private Textbox textboxPhone;
 	
 	@Override

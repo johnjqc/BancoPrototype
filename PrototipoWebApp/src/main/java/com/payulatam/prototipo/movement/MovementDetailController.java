@@ -28,18 +28,42 @@ import com.payulatam.prototipo.ControllerHelper;
  */
 public class MovementDetailController extends GenericForwardComposer {
 	
+	/**
+	 * Serial number
+	 */
 	private static final long serialVersionUID = 6077674101236551588L;
 	
 	@GigaSpaceContext
     protected GigaSpace gigaSpace;
 	
+	/**
+	 * Actual movement object
+	 */
 	private Movement actualMovement;
 	
+	/**
+	 * New button object
+	 */
 	private Button buttonNew;
 	
+	/**
+	 * Combobox account object
+	 */
 	private Combobox comboboxAccount;
+	
+	/**
+	 * Combobox type objetc
+	 */
 	private Combobox comboboxType;
+	
+	/**
+	 * Datebox date object
+	 */
 	private Datebox dateboxDate;
+	
+	/**
+	 * Decimabox value object
+	 */
 	private Decimalbox decimalboxValue;
 	
 	@Override

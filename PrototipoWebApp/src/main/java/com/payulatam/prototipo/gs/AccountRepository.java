@@ -25,6 +25,13 @@ public class AccountRepository<J extends Account> extends AbstractRepository<Acc
 		return result;
 	}
 	
+	/**
+	 * Generate query string
+	 * @param customerId String
+	 * @param accountNumber String
+	 * @param balance BigDecimal
+	 * @return String
+	 */
 	public String generateStringQuery(String customerId, String accountNumber, BigDecimal balance) {
 		StringBuilder query = new StringBuilder();
 		if (customerId != null && !"*".equals(customerId) && !customerId.isEmpty()) {

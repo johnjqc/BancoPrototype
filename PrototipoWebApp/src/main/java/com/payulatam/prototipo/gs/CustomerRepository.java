@@ -23,6 +23,13 @@ public class CustomerRepository<J extends Customer> extends AbstractRepository<C
 		return result;
 	}
 	
+	/**
+	 * Generate query string
+	 * @param customerId String
+	 * @param accountNumber String
+	 * @param balance BigDecimal
+	 * @return String
+	 */
 	public String generateStringQuery(String name, String address, String phone) {
 		StringBuilder query = new StringBuilder();
 		if (name != null && !"*".equals(name) && !name.isEmpty()) {

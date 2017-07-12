@@ -14,8 +14,14 @@ import com.payulatam.model.BaseEntity;
  */
 public abstract class AbstractRepository<J extends BaseEntity> implements IGenericRepository <J> {
 	
+	/**
+	 * GigaSpace object
+	 */
 	protected GigaSpace gigaSpace;
 	
+	/**
+	 * Class of entity for query by Id
+	 */
 	protected Class<J> entityClass;
 	
 	@SuppressWarnings("unchecked")

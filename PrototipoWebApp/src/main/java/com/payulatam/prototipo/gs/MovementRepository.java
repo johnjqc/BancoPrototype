@@ -27,6 +27,13 @@ public class MovementRepository<J extends Movement> extends AbstractRepository<M
 		return result;
 	}
 	
+	/**
+	 * Generate query string
+	 * @param customerId String
+	 * @param accountNumber String
+	 * @param balance BigDecimal
+	 * @return String
+	 */
 	public String generateStringQuery(String customerId, String typeMovement, Date date, BigDecimal balance) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
 		StringBuilder query = new StringBuilder();
