@@ -1,6 +1,6 @@
 package com.payulatam.prototipo.gs;
 
-import com.payulatam.model.Customer;
+import com.payulatam.prototipo.model.Customer;
 
 /**
  * Interface with specific methods definition

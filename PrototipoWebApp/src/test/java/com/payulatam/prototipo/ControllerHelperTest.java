@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 
-import com.payulatam.enums.MovementType;
-import com.payulatam.model.Movement;
+import com.payulatam.prototipo.enums.MovementType;
+import com.payulatam.prototipo.model.Movement;
 
 /**
  * The Class ControllerHelperTest.

@@ -4,7 +4,7 @@ import org.openspaces.core.GigaSpace;
 import org.springframework.core.GenericTypeResolver;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.model.BaseEntity;
+import com.payulatam.prototipo.model.BaseEntity;
 
 /**
  * Repository with implemented generic methods 

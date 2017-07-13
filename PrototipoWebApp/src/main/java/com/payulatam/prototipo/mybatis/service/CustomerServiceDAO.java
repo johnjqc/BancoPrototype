@@ -1,8 +1,8 @@
-package com.apyulatam.mybatis.service;
+package com.payulatam.prototipo.mybatis.service;
 
 import java.util.List;
 
-import com.payulatam.model.Customer;
+import com.payulatam.prototipo.model.Customer;
 
 /**
  * DAO for Customer Service

@@ -1,4 +1,4 @@
-package com.payulatam.common;
+package com.payulatam.prototipo.common;
 
 /**
  * Constants for Prototipe Aplication

@@ -2,7 +2,7 @@ package com.payulatam.prototipo.gs;
 
 import org.openspaces.core.GigaSpace;
 
-import com.payulatam.model.Customer;
+import com.payulatam.prototipo.model.Customer;
 
 /**
  * Implementation of repository by GigaSpace for Customer

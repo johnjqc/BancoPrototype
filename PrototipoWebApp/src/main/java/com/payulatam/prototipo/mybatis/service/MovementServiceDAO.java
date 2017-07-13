@@ -1,10 +1,10 @@
-package com.apyulatam.mybatis.service;
+package com.payulatam.prototipo.mybatis.service;
 
 import java.util.Date;
 import java.util.List;
 
-import com.payulatam.dto.TotalTypesMovement;
-import com.payulatam.model.Movement;
+import com.payulatam.prototipo.dto.TotalTypesMovement;
+import com.payulatam.prototipo.model.Movement;
 
 /**
  * Mapper for Account 

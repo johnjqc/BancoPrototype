@@ -1,10 +1,10 @@
-package com.payulatam.mybatis;
+package com.payulatam.prototipo.mybatis.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
-import com.payulatam.model.Customer;
+import com.payulatam.prototipo.model.Customer;
 
 /**
  * Customer mapper of MyBatis

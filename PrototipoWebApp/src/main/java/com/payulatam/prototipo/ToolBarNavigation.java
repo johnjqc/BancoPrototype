@@ -4,7 +4,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 
-import com.payulatam.common.Constantes;
+import com.payulatam.prototipo.common.Constantes;
 
 /**
  * Navigation controller for Tool Bar menu on template view

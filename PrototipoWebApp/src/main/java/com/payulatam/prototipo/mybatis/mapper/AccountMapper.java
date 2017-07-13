@@ -1,4 +1,4 @@
-package com.payulatam.mybatis;
+package com.payulatam.prototipo.mybatis.mapper;
 
 import java.util.Date;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.payulatam.model.Account;
+import com.payulatam.prototipo.model.Account;
 
 /**
  * Mapper for Account 

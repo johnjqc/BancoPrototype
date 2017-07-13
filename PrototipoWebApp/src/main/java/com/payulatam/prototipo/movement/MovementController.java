@@ -16,14 +16,14 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 
-import com.payulatam.common.Constantes;
-import com.payulatam.enums.MovementType;
-import com.payulatam.model.Account;
-import com.payulatam.model.Movement;
 import com.payulatam.prototipo.BaseController;
 import com.payulatam.prototipo.ControllerHelper;
+import com.payulatam.prototipo.common.Constantes;
+import com.payulatam.prototipo.enums.MovementType;
 import com.payulatam.prototipo.gs.AccountRepository;
 import com.payulatam.prototipo.gs.MovementRepository;
+import com.payulatam.prototipo.model.Account;
+import com.payulatam.prototipo.model.Movement;
 
 /**
  * Controller for Movement

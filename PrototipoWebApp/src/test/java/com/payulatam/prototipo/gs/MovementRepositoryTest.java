@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.payulatam.enums.MovementType;
-import com.payulatam.model.Movement;
+import com.payulatam.prototipo.enums.MovementType;
+import com.payulatam.prototipo.model.Movement;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/Test-context.xml" })

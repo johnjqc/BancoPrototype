@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import org.openspaces.core.GigaSpace;
 
-import com.payulatam.model.Account;
+import com.payulatam.prototipo.model.Account;
 
 /**
  * Implementation of repository by GigaSpace for Account

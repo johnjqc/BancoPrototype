@@ -12,10 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gigaspaces.internal.utils.Assert;
-import com.payulatam.enums.MovementType;
-import com.payulatam.model.Account;
-import com.payulatam.model.Customer;
-import com.payulatam.model.Movement;
+import com.payulatam.prototipo.enums.MovementType;
+import com.payulatam.prototipo.model.Account;
+import com.payulatam.prototipo.model.Customer;
+import com.payulatam.prototipo.model.Movement;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration

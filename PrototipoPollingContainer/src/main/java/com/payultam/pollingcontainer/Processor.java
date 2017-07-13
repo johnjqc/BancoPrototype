@@ -14,9 +14,9 @@ import org.openspaces.events.polling.receive.ReceiveOperationHandler;
 import org.openspaces.events.polling.receive.SingleTakeReceiveOperationHandler;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.enums.MovementType;
-import com.payulatam.model.Account;
-import com.payulatam.model.Movement;
+import com.payulatam.prototipo.enums.MovementType;
+import com.payulatam.prototipo.model.Account;
+import com.payulatam.prototipo.model.Movement;
 
 
 /**

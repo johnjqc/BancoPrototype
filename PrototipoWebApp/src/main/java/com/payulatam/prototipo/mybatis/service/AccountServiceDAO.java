@@ -1,9 +1,9 @@
-package com.apyulatam.mybatis.service;
+package com.payulatam.prototipo.mybatis.service;
 
 import java.util.Date;
 import java.util.List;
 
-import com.payulatam.model.Account;
+import com.payulatam.prototipo.model.Account;
 
 /**
  * DAO for Account 

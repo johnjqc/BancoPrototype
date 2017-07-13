@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.openspaces.core.GigaSpace;
 
-import com.payulatam.model.Movement;
+import com.payulatam.prototipo.model.Movement;
 
 /**
  * Implementation of repository by GigaSpace for Movement

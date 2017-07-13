@@ -14,14 +14,14 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 
-import com.apyulatam.mybatis.service.AccountServiceDAO;
-import com.apyulatam.mybatis.service.MovementServiceDAO;
-import com.payulatam.dto.Report;
-import com.payulatam.dto.TotalTypesMovement;
-import com.payulatam.model.Account;
-import com.payulatam.model.Customer;
 import com.payulatam.prototipo.BaseController;
+import com.payulatam.prototipo.dto.Report;
+import com.payulatam.prototipo.dto.TotalTypesMovement;
 import com.payulatam.prototipo.gs.CustomerRepository;
+import com.payulatam.prototipo.model.Account;
+import com.payulatam.prototipo.model.Customer;
+import com.payulatam.prototipo.mybatis.service.AccountServiceDAO;
+import com.payulatam.prototipo.mybatis.service.MovementServiceDAO;
 
 /**
  * Controller Report ZK view

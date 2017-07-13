@@ -3,7 +3,7 @@ package com.payulatam.prototipo.gs;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.payulatam.model.Movement;
+import com.payulatam.prototipo.model.Movement;
 
 /**
  * Interface with specific methods definition

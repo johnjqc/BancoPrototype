@@ -1,4 +1,4 @@
-package com.payulatam.dto;
+package com.payulatam.prototipo.dto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

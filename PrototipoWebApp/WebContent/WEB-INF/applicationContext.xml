@@ -19,9 +19,9 @@
 	-->
     <context:annotation-config/>
     
-    <bean id="CustomerServiceDAO" class="com.apyulatam.mybatis.service.CustomerServiceDAOImpl" />
-    <bean id="AccountServiceDAO" class="com.apyulatam.mybatis.service.AccountServiceDAOImpl" />
-    <bean id="MovementServiceDAO" class="com.apyulatam.mybatis.service.MovementServiceDAOImpl" />
+    <bean id="CustomerServiceDAO" class="com.payulatam.prototipo.mybatis.service.CustomerServiceDAOImpl" />
+    <bean id="AccountServiceDAO" class="com.payulatam.prototipo.mybatis.service.AccountServiceDAOImpl" />
+    <bean id="MovementServiceDAO" class="com.payulatam.prototipo.mybatis.service.MovementServiceDAOImpl" />
     
     <!--
         Enables the usage of @GigaSpaceContext annotation based injection.
@@ -79,17 +79,17 @@
 	</bean>
 
 	<bean id="customerDAOMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.payulatam.mybatis.CustomerMapper" />
+		<property name="mapperInterface" value="com.payulatam.prototipo.mybatis.mapper.CustomerMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	
 	<bean id="accountDAOMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.payulatam.mybatis.AccountMapper" />
+		<property name="mapperInterface" value="com.payulatam.prototipo.mybatis.mapper.AccountMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	
 	<bean id="movementDAOMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.payulatam.mybatis.MovementMapper" />
+		<property name="mapperInterface" value="com.payulatam.prototipo.mybatis.mapper.MovementMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 </beans>

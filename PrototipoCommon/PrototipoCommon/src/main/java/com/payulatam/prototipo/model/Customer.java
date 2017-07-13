@@ -1,4 +1,4 @@
-package com.payulatam.model;
+package com.payulatam.prototipo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

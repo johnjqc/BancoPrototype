@@ -1,4 +1,4 @@
-package com.payulatam.dto;
+package com.payulatam.prototipo.dto;
 
 /**
  * DTO for MyBatis query total of types movement

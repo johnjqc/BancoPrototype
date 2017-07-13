@@ -14,9 +14,9 @@ import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Textbox;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.common.Constantes;
-import com.payulatam.model.Account;
-import com.payulatam.model.Customer;
+import com.payulatam.prototipo.common.Constantes;
+import com.payulatam.prototipo.model.Account;
+import com.payulatam.prototipo.model.Customer;
 
 /**
  * Account Detail Controller ZK

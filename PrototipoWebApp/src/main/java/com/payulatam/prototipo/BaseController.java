@@ -6,7 +6,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModelList;
 
-import com.payulatam.model.BaseEntity;
+import com.payulatam.prototipo.model.BaseEntity;
 
 /**
  * Base class with generic objects for Controllers

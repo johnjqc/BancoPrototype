@@ -1,6 +1,6 @@
 package com.payulatam.prototipo.gs;
 
-import com.payulatam.model.BaseEntity;
+import com.payulatam.prototipo.model.BaseEntity;
 
 /**
  * Interface with generic methods definition

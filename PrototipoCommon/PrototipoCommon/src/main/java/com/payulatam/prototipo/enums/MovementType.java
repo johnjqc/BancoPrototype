@@ -1,4 +1,4 @@
-package com.payulatam.enums;
+package com.payulatam.prototipo.enums;
 
 /**
  * Movement types

@@ -2,7 +2,7 @@ package com.payulatam.prototipo.gs;
 
 import java.math.BigDecimal;
 
-import com.payulatam.model.Account;
+import com.payulatam.prototipo.model.Account;
 
 /**
  * Interface with specific methods definition

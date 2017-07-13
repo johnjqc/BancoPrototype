@@ -15,11 +15,11 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 
 import com.j_spaces.core.client.SQLQuery;
-import com.payulatam.common.Constantes;
-import com.payulatam.enums.MovementType;
-import com.payulatam.model.Account;
-import com.payulatam.model.Movement;
 import com.payulatam.prototipo.ControllerHelper;
+import com.payulatam.prototipo.common.Constantes;
+import com.payulatam.prototipo.enums.MovementType;
+import com.payulatam.prototipo.model.Account;
+import com.payulatam.prototipo.model.Movement;
 
 /**
  * Controller Detal for Movements

@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 
-import com.payulatam.model.BaseEntity;
+import com.payulatam.prototipo.model.BaseEntity;
 
 /**
  * Utilities for controllers

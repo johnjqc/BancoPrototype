@@ -1,4 +1,4 @@
-package com.payulatam.model;
+package com.payulatam.prototipo.model;
 
 import java.math.BigDecimal;
 

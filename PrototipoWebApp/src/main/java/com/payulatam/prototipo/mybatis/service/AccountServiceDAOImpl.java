@@ -1,4 +1,4 @@
-package com.apyulatam.mybatis.service;
+package com.payulatam.prototipo.mybatis.service;
 
 import java.util.Date;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.payulatam.model.Account;
-import com.payulatam.mybatis.AccountMapper;
+import com.payulatam.prototipo.model.Account;
+import com.payulatam.prototipo.mybatis.mapper.AccountMapper;
 
 /**
  * DAO Implementation for Account
